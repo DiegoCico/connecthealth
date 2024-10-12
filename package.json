@@ -7,17 +7,28 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
     "firebase": "^10.14.1",
+    "newsapi": "^2.4.1",
+    "openai": "^4.67.3",
+    "puppeteer": "^23.5.3",
+    "puppeteer-core": "^23.5.3",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
     "react-scripts": "5.0.1",
+    "web-streams-polyfill": "^4.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "concurrently \"npm run start-react\" \"npm run start-flask\"",
+    "start": "concurrently \"npm run start-react\" \"npm run start-backend\"",
     "start-react": "react-scripts start",
-    "start-flask": "python3 src/backend/app.py",
+    "start-backend": "node src/backend/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -39,4 +50,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-} }
+  },
+  "proxy": "http://127.0.0.1::5000"
+}

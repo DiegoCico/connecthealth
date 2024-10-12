@@ -162,7 +162,7 @@ const handleSubmit = async () => {
           {/* Add more details as necessary */}
         </div>
       )}
-      
+        
       <div className="tab-buttons">
         <button className={activeTab === 'personal' ? 'active' : ''} onClick={() => setActiveTab('personal')}>Personal</button>
         <button className={activeTab === 'medical' ? 'active' : ''} onClick={() => setActiveTab('medical')}>Medical</button>

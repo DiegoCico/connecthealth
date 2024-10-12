@@ -10,86 +10,84 @@ const SideNav = () => {
   const [patients, setPatients] = useState([]);
   const [noResults, setNoResults] = useState(false);
   const navigate = useNavigate();
-
-  const handleSearch = async () => {
-    if (searchTerm.trim() === "") {
-      setNoResults(false);
-      return;
-    }
-
-    const q = query(collection(db, "patients"), where("name", "==", searchTerm));
-    const querySnapshot = await getDocs(q);
-
-    if (querySnapshot.empty) {
-      setNoResults(true);
-      setPatients([]);
-    } else {
-      const results = [];
-
-      for (const patientDoc of querySnapshot.docs) {
-        const userId = patientDoc.id;
-        const personalRef = doc(db, `patients/${userId}/Personal/personalData`);
-        const personalSnapshot = await getDoc(personalRef);
-
-        if (personalSnapshot.exists()) {
-          results.push({
-            id: userId,
-            ...personalSnapshot.data(),
-          });
-        }
-      }
-
-      if (results.length > 0) {
-        setPatients(results);
-        setNoResults(false);
-      } else {
-        setNoResults(true);
-      }
-    }
-  };
-
-  useEffect(() => {
-    handleSearch();
-  }, [searchTerm]);
-
-  const handleButtonClick = () => {
-    setIsSearchMode(true);
-  };
+  const [allNames, setAllNames] = useState([]); // Array to hold all patient names
+  const [filterNames, setFilterNames] = useState([]); // Filtered names for dropdown
+  const [showDropdown, setShowDropdown] = useState(false); // Show dropdown state
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleCreatePatient = async () => {
+    console.log('add new patient clicked')
     const newPatientRef = await addDoc(collection(db, "patients"), { createdAt: new Date() });
     const newUid = newPatientRef.id;
     navigate(`/patient/${newUid}`, { state: { modificationMode: true } });
+  };
+
+  const handleButtonClick = async () => {
+    setIsSearchMode(true);
+
+    try {
+      const patientsQuery = collection(db, "patients"); // Reference to the 'patients' collection
+      const patientsSnapshot = await getDocs(patientsQuery); // Get all patients
+
+      const names = []; // Array to store patient names
+      for (const patientDoc of patientsSnapshot.docs) {
+        const personalRef = doc(db, "patients", patientDoc.id, "Personal", "Details"); // Reference to the 'Personal' document
+        const personalSnap = await getDoc(personalRef); // Get personal details of patient
+
+        if (personalSnap.exists()) {
+          const personalData = personalSnap.data();
+          names.push({ id: patientDoc.id, name: personalData.name }); // Add patient name to names array
+        }
+      }
+
+      setAllNames(names); // Set all names in the state
+      console.log('All patient names:', names);
+    } catch (error) {
+      console.log('Error fetching patient names:', error);
+    }
+  };
+
+  const handleInput = (e) => {
+    const input = e.target.value.toLowerCase();
+    setSearchTerm(input);
+
+    if (input.length > 0) {
+      const filtered = allNames
+        .filter((patient) => patient.name.toLowerCase().includes(input))
+        .map((patient) => patient.name); // Extract only the name for display
+
+      setFilterNames(filtered); // Update the filterNames state with the filtered list
+      setShowDropdown(filtered.length > 0); // Show dropdown only if there are results
+      console.log('Filtered Names:', filtered, showDropdown);
+    }
   };
 
   const handlePatientClick = (userId) => {
     navigate(`/patient/${userId}`);
   };
 
-  const handlePayButtonClick = () => {
-    // Navigate to the payment page or perform any payment logic
-    // alert("Payment functionality coming soon!");
-    setIsSearchMode(true)
-  };
-
-  const handleInput = async(e) => {
-    const input = e.target.value
-    setSearchTerm(input)
-
-    const usersCollection = collection(db, "patients");
-    const usersSnapshot = await getDocs(usersCollection);
-
-    let nameFound = false;
-
-
+  const handleChargeClick = () => {
+    setShowPopup(true);
   }
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
 
   return (
     <div className="side-nav">
       <ul>
-        <li><button onClick={handleButtonClick} className="nav-button">Patient Search</button></li>
-        <li><button className="nav-button diagnostic-button">Diagnostic</button></li>
-        <li><button onClick={handlePayButtonClick} className="nav-button pay-button">Charge</button></li>
+        <li>
+          <button onClick={handleButtonClick} className="nav-button">
+            Patient Search
+          </button>
+        </li>
+        <li>
+          <button className="nav-button diagnostic-button">Diagnostic</button>
+        </li>
+        <li>
+          <button className="nav-button pay-button" onClick={handleChargeClick}>Charge</button>
+        </li>
       </ul>
 
       {isSearchMode && (
@@ -99,29 +97,30 @@ const SideNav = () => {
             className="search-input"
             placeholder="Search patient by name..."
             value={searchTerm}
-            // onChange={(e) => setSearchTerm(e.target.value)}
             onChange={handleInput}
           />
-          {noResults && (
-            <div className="no-results">
-              <p>No patient found. <span onClick={handleCreatePatient} className="create-patient-link">Create Patient</span></p>
-            </div>
-          )}
-          {patients.length > 0 && (
-            <ul className="patient-list">
-              {patients.map((patient, index) => (
-                <li key={index} onClick={() => handlePatientClick(patient.id)} className="patient-item">
-                  <strong>{patient.name}</strong> <br />
-                  DOB: {patient.DOB} <br />
-                  Email: {patient.email} <br />
-                  Phone: {patient.phoneNumber} <br />
-                  Address: {patient.address} <br />
-                  Emergency Contact: {patient.emergencyContact}
-                </li>
-              ))}
-            </ul>
-          )}
+          <button onClick={() => handleCreatePatient()}>Add new patient</button>
 
+        </div>
+      )}
+
+      {showDropdown && (
+        <div className="dropdown-menu">
+          {filterNames.map((name, index) => (
+            <div className="dropdown-item" key={index}>
+              {name}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup">
+            <button className="close-btn" onClick={closePopup}>X</button>
+            <h2>Charge Details</h2>
+            <p>Charge information will go here.</p>
+          </div>
         </div>
       )}
     </div>
