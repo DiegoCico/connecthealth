@@ -172,7 +172,7 @@ const Ruff = () => {
         } else {
           replyMessage = { role: 'assistant', content: `🐶 Ruff could not find the user: ${userData}` };
         }
-      } else if(userInput.toLowerCase() == "help") {
+      } else if(userInput.toLowerCase() === "help") {
         replyMessage = { role: 'assistant', content: `🐶 Ruff found: write any mensage and I'll support you. Special commands: find {user name} (will retrive user data), medical {user name} (will retrive some medical records), go to {user name} (will provide the url for their page)` };
       }else {
         // For other questions, call your backend

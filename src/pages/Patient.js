@@ -105,6 +105,7 @@ const Patient = () => {
 
   const handleChange = (e) => {
     setPatientData({ ...patientData, [e.target.name]: e.target.value });
+    console.log(patientData)
     setValidationErrors((prevErrors) => ({ ...prevErrors, [e.target.name]: false })); // Clear field error on change
   };
 
@@ -129,6 +130,7 @@ const Patient = () => {
       default:
         return (
           <Personal
+            uid={uid}
             patientData={patientData}
             handleChange={handleChange}
             handleInsuranceFileChange={handleInsuranceFileChange}

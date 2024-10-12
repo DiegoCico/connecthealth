@@ -1,0 +1,492 @@
+{
+    "patients": {
+      "uidG12345903412345787": {
+        "Personal": {
+          "Details": {
+            "name": "Jennifer Miller",
+            "DOB": "1983-12-01",
+            "email": "jennifermiller@example.com",
+            "phoneNumber": "555-4433",
+            "address": "234 Maple Street, Brooksville",
+            "emergencyContact": "Mark Miller - 555-7765",
+            "patientPhoto": "https://example.com/photos/jennifer.jpg",
+            "insuranceProvider": "Kaiser Permanente",
+            "insurancePolicy": "KP123456789",
+            "insurancePhoto": "https://example.com/photos/insurance_jennifer.jpg",
+            "physician": "Dr. Brown"
+          }
+        },
+        "MedicalVisits": {
+          "visitG1": {
+            "reason": "Annual Physical",
+            "results": "Healthy",
+            "date": "2024-01-02",
+            "time": "10:00 AM"
+          },
+          "visitG2": {
+            "reason": "Sore Throat",
+            "results": "Prescribed lozenges",
+            "date": "2024-01-15",
+            "time": "01:30 PM"
+          },
+          "visitG3": {
+            "reason": "Headache",
+            "results": "Advised hydration",
+            "date": "2024-01-20",
+            "time": "11:00 AM"
+          },
+          "visitG4": {
+            "reason": "Cough",
+            "results": "Prescribed cough syrup",
+            "date": "2024-01-28",
+            "time": "09:00 AM"
+          },
+          "visitG5": {
+            "reason": "Back Pain",
+            "results": "Prescribed physical therapy",
+            "date": "2024-02-10",
+            "time": "02:30 PM"
+          },
+          "visitG6": {
+            "reason": "Follow-up for Back Pain",
+            "results": "Improvement noted",
+            "date": "2024-02-25",
+            "time": "11:30 AM"
+          },
+          "visitG7": {
+            "reason": "Cold Symptoms",
+            "results": "Prescribed decongestants",
+            "date": "2024-03-02",
+            "time": "10:00 AM"
+          },
+          "visitG8": {
+            "reason": "Flu Shot",
+            "results": "Administered",
+            "date": "2024-03-15",
+            "time": "09:00 AM"
+          },
+          "visitG9": {
+            "reason": "Follow-up for Cold",
+            "results": "Symptoms improved",
+            "date": "2024-03-25",
+            "time": "10:30 AM"
+          },
+          "visitG10": {
+            "reason": "Seasonal Allergies",
+            "results": "Antihistamine prescribed",
+            "date": "2024-04-02",
+            "time": "11:00 AM"
+          },
+          "visitG11": {
+            "reason": "Headache",
+            "results": "Prescribed pain relief",
+            "date": "2024-04-15",
+            "time": "09:30 AM"
+          },
+          "visitG12": {
+            "reason": "Follow-up for Allergies",
+            "results": "Symptoms controlled",
+            "date": "2024-04-20",
+            "time": "10:00 AM"
+          },
+          "visitG13": {
+            "reason": "High Blood Pressure",
+            "results": "Medication prescribed",
+            "date": "2024-05-01",
+            "time": "09:00 AM"
+          },
+          "visitG14": {
+            "reason": "Routine Follow-up",
+            "results": "Blood pressure stable",
+            "date": "2024-05-10",
+            "time": "11:00 AM"
+          },
+          "visitG15": {
+            "reason": "Chest Pain",
+            "results": "EKG scheduled",
+            "date": "2024-05-25",
+            "time": "10:30 AM"
+          },
+          "visitG16": {
+            "reason": "EKG Results",
+            "results": "No abnormalities",
+            "date": "2024-06-01",
+            "time": "10:00 AM"
+          },
+          "visitG17": {
+            "reason": "Migraine",
+            "results": "Prescribed triptans",
+            "date": "2024-06-10",
+            "time": "09:00 AM"
+          },
+          "visitG18": {
+            "reason": "Follow-up for Migraine",
+            "results": "Symptoms improving",
+            "date": "2024-06-25",
+            "time": "09:30 AM"
+          },
+          "visitG19": {
+            "reason": "Sprained Ankle",
+            "results": "Advised rest",
+            "date": "2024-07-01",
+            "time": "10:00 AM"
+          },
+          "visitG20": {
+            "reason": "Physical Therapy for Ankle",
+            "results": "Progress noted",
+            "date": "2024-07-10",
+            "time": "09:00 AM"
+          },
+          "visitG21": {
+            "reason": "Follow-up for Ankle",
+            "results": "Improvement",
+            "date": "2024-07-20",
+            "time": "09:30 AM"
+          },
+          "visitG22": {
+            "reason": "Routine Checkup",
+            "results": "All clear",
+            "date": "2024-08-01",
+            "time": "10:00 AM"
+          },
+          "visitG23": {
+            "reason": "Chest Pain",
+            "results": "Stress test ordered",
+            "date": "2024-08-15",
+            "time": "11:30 AM"
+          },
+          "visitG24": {
+            "reason": "Stress Test Results",
+            "results": "Normal",
+            "date": "2024-08-20",
+            "time": "09:00 AM"
+          },
+          "visitG25": {
+            "reason": "Foot Pain",
+            "results": "Referred to podiatry",
+            "date": "2024-09-01",
+            "time": "11:00 AM"
+          },
+          "visitG26": {
+            "reason": "Podiatry Consultation",
+            "results": "Prescribed orthotics",
+            "date": "2024-09-10",
+            "time": "10:00 AM"
+          },
+          "visitG27": {
+            "reason": "Follow-up for Foot Pain",
+            "results": "Improvement noted",
+            "date": "2024-09-20",
+            "time": "10:30 AM"
+          },
+          "visitG28": {
+            "reason": "Eye Infection",
+            "results": "Prescribed eye drops",
+            "date": "2024-09-30",
+            "time": "09:00 AM"
+          },
+          "visitG29": {
+            "reason": "Follow-up for Eye Infection",
+            "results": "Cleared",
+            "date": "2024-10-10",
+            "time": "10:00 AM"
+          },
+          "visitG30": {
+            "reason": "Routine Checkup",
+            "results": "All clear",
+            "date": "2024-10-20",
+            "time": "09:00 AM"
+          },
+          "visitG31": {
+            "reason": "Dizziness",
+            "results": "Blood test ordered",
+            "date": "2024-11-01",
+            "time": "11:00 AM"
+          },
+          "visitG32": {
+            "reason": "Blood Test Results",
+            "results": "Normal",
+            "date": "2024-11-05",
+            "time": "10:30 AM"
+          },
+          "visitG33": {
+            "reason": "Fatigue",
+            "results": "Iron supplements prescribed",
+            "date": "2024-11-15",
+            "time": "09:30 AM"
+          },
+          "visitG34": {
+            "reason": "Follow-up for Fatigue",
+            "results": "Improved energy levels",
+            "date": "2024-11-25",
+            "time": "09:00 AM"
+          },
+          "visitG35": {
+            "reason": "Cold Symptoms",
+            "results": "Prescribed decongestants",
+            "date": "2024-12-01",
+            "time": "11:30 AM"
+          },
+          "visitG36": {
+            "reason": "Follow-up for Cold",
+            "results": "Fully recovered",
+            "date": "2024-12-05",
+            "time": "10:00 AM"
+          },
+          "visitG37": {
+            "reason": "Joint Pain",
+            "results": "Referred to rheumatologist",
+            "date": "2024-12-12",
+            "time": "11:30 AM"
+          },
+          "visitG38": {
+            "reason": "Rheumatology Consultation",
+            "results": "Arthritis diagnosed",
+            "date": "2024-12-20",
+            "time": "09:00 AM"
+          },
+          "visitG39": {
+            "reason": "Follow-up for Arthritis",
+            "results": "Medication prescribed",
+            "date": "2025-01-02",
+            "time": "09:30 AM"
+          },
+          "visitG40": {
+            "reason": "Routine Checkup",
+            "results": "All clear",
+            "date": "2025-01-15",
+            "time": "10:00 AM"
+          },
+          "visitG41": {
+            "reason": "Migraine",
+            "results": "Prescribed triptans",
+            "date": "2025-02-01",
+            "time": "09:00 AM"
+          },
+          "visitG42": {
+            "reason": "Physical Therapy for Back Pain",
+            "results": "Progressing well",
+            "date": "2025-02-15",
+            "time": "10:00 AM"
+          },
+          "visitG43": {
+            "reason": "Follow-up for Physical Therapy",
+            "results": "Back improved",
+            "date": "2025-03-01",
+            "time": "09:30 AM"
+          },
+          "visitG44": {
+            "reason": "Chest Pain",
+            "results": "Referred to cardiologist",
+            "date": "2025-03-20",
+            "time": "10:00 AM"
+          },
+          "visitG45": {
+            "reason": "Cardiology Consultation",
+            "results": "Stress test ordered",
+            "date": "2025-03-30",
+            "time": "11:30 AM"
+          },
+          "visitG46": {
+            "reason": "Follow-up for Chest Pain",
+            "results": "No abnormalities",
+            "date": "2025-04-05",
+            "time": "10:00 AM"
+          },
+          "visitG47": {
+            "reason": "Flu Shot",
+            "results": "Administered",
+            "date": "2025-04-15",
+            "time": "09:00 AM"
+          },
+          "visitG48": {
+            "reason": "Routine Checkup",
+            "results": "No issues",
+            "date": "2025-05-01",
+            "time": "09:30 AM"
+          },
+          "visitG49": {
+            "reason": "Allergy Testing",
+            "results": "Pollen allergy confirmed",
+            "date": "2025-05-15",
+            "time": "10:30 AM"
+          },
+          "visitG50": {
+            "reason": "Eye Pain",
+            "results": "Prescribed eye drops",
+            "date": "2025-06-01",
+            "time": "09:00 AM"
+          },
+          "visitG51": {
+            "reason": "Follow-up for Eye Pain",
+            "results": "Improved with drops",
+            "date": "2025-06-10",
+            "time": "09:30 AM"
+          },
+          "visitG52": {
+            "reason": "Chest Pain",
+            "results": "Referred to specialist",
+            "date": "2025-06-20",
+            "time": "10:00 AM"
+          },
+          "visitG53": {
+            "reason": "Specialist Consultation",
+            "results": "Further tests ordered",
+            "date": "2025-07-01",
+            "time": "10:30 AM"
+          },
+          "visitG54": {
+            "reason": "Follow-up for Specialist Tests",
+            "results": "No issues found",
+            "date": "2025-07-10",
+            "time": "11:00 AM"
+          },
+          "visitG55": {
+            "reason": "Routine Checkup",
+            "results": "All clear",
+            "date": "2025-07-20",
+            "time": "09:00 AM"
+          }
+        },
+        "Prescriptions": {
+          "presG1": {
+            "name": "Ibuprofen",
+            "dosage": "400 mg",
+            "startDate": "2024-04-15",
+            "duration": "5",
+            "recurring": false,
+            "expirationDate": "2024-04-20"
+          },
+          "presG2": {
+            "name": "Lisinopril",
+            "dosage": "10 mg",
+            "startDate": "2024-05-01",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-06-01"
+          },
+          "presG3": {
+            "name": "Triptans",
+            "dosage": "50 mg",
+            "startDate": "2024-06-10",
+            "duration": "10",
+            "recurring": false,
+            "expirationDate": "2024-06-20"
+          },
+          "presG4": {
+            "name": "Cough Syrup",
+            "dosage": "10 ml",
+            "startDate": "2024-01-28",
+            "duration": "7",
+            "recurring": false,
+            "expirationDate": "2024-02-04"
+          },
+          "presG5": {
+            "name": "Lozenges",
+            "dosage": "As needed",
+            "startDate": "2024-01-15",
+            "duration": "14",
+            "recurring": false,
+            "expirationDate": "2024-01-29"
+          },
+          "presG6": {
+            "name": "Antihistamine",
+            "dosage": "10 mg",
+            "startDate": "2024-04-02",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-05-02"
+          },
+          "presG7": {
+            "name": "Iron Supplements",
+            "dosage": "325 mg",
+            "startDate": "2024-11-15",
+            "duration": "60",
+            "recurring": true,
+            "expirationDate": "2025-01-15"
+          },
+          "presG8": {
+            "name": "Cholesterol Medication",
+            "dosage": "20 mg",
+            "startDate": "2024-05-01",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-06-01"
+          },
+          "presG9": {
+            "name": "Blood Pressure Medication",
+            "dosage": "5 mg",
+            "startDate": "2024-05-01",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-06-01"
+          },
+          "presG10": {
+            "name": "Eye Drops",
+            "dosage": "1 drop twice daily",
+            "startDate": "2025-06-01",
+            "duration": "10",
+            "recurring": false,
+            "expirationDate": "2025-06-11"
+          },
+          "presG11": {
+            "name": "Pain Relief Cream",
+            "dosage": "Apply twice daily",
+            "startDate": "2025-02-01",
+            "duration": "14",
+            "recurring": false,
+            "expirationDate": "2025-02-15"
+          },
+          "presG12": {
+            "name": "Inhaler",
+            "dosage": "2 puffs as needed",
+            "startDate": "2024-05-01",
+            "duration": "N/A",
+            "recurring": true,
+            "expirationDate": "2025-05-01"
+          },
+          "presG13": {
+            "name": "Corticosteroid",
+            "dosage": "30 mg",
+            "startDate": "2025-03-01",
+            "duration": "10",
+            "recurring": false,
+            "expirationDate": "2025-03-11"
+          },
+          "presG14": {
+            "name": "Antibiotics",
+            "dosage": "500 mg",
+            "startDate": "2025-06-20",
+            "duration": "7",
+            "recurring": false,
+            "expirationDate": "2025-06-27"
+          },
+          "presG15": {
+            "name": "Antacid",
+            "dosage": "1 tablet after meals",
+            "startDate": "2025-01-05",
+            "duration": "14",
+            "recurring": false,
+            "expirationDate": "2025-01-19"
+          },
+          "presG16": {
+            "name": "Steroid Cream",
+            "dosage": "Apply twice daily",
+            "startDate": "2025-03-15",
+            "duration": "14",
+            "recurring": false,
+            "expirationDate": "2025-03-29"
+          }
+        },
+        "Financial": {
+          "cardG1": {
+            "cardHolderName": "Jennifer Miller",
+            "cardNumber": "7890123456789012",
+            "expiryDate": "08/27",
+            "cvv": "567"
+          }
+        }
+      }
+    }
+  }
+  

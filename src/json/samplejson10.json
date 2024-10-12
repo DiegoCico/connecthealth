@@ -1,0 +1,282 @@
+{
+    "patients": {
+      "idH12345903412345788": {
+        "Personal": {
+          "Details": {
+            "name": "David Johnson",
+            "DOB": "1979-07-19",
+            "email": "davidjohnson@example.com",
+            "phoneNumber": "555-5567",
+            "address": "45 Oak Street, Maplewood",
+            "emergencyContact": "Lisa Johnson - 555-7789",
+            "patientPhoto": "https://example.com/photos/david.jpg",
+            "insuranceProvider": "UnitedHealthcare",
+            "insurancePolicy": "UH987654321",
+            "insurancePhoto": "https://example.com/photos/insurance_david.jpg",
+            "physician": "Dr. White"
+          }
+        },
+        "MedicalVisits": {
+          "visitH1": {
+            "reason": "Annual Physical",
+            "results": "All clear",
+            "date": "2024-01-10",
+            "time": "09:00 AM"
+          },
+          "visitH2": {
+            "reason": "Flu Symptoms",
+            "results": "Prescribed flu treatment",
+            "date": "2024-01-25",
+            "time": "11:30 AM"
+          },
+          "visitH3": {
+            "reason": "Back Pain",
+            "results": "Referred to physical therapy",
+            "date": "2024-02-05",
+            "time": "02:00 PM"
+          },
+          "visitH4": {
+            "reason": "Follow-up for Back Pain",
+            "results": "Progress noted",
+            "date": "2024-02-20",
+            "time": "10:00 AM"
+          },
+          "visitH5": {
+            "reason": "Seasonal Allergies",
+            "results": "Antihistamine prescribed",
+            "date": "2024-03-01",
+            "time": "09:30 AM"
+          },
+          "visitH6": {
+            "reason": "Headache",
+            "results": "Prescribed pain relief",
+            "date": "2024-03-15",
+            "time": "11:00 AM"
+          },
+          "visitH7": {
+            "reason": "Follow-up for Allergies",
+            "results": "Symptoms improved",
+            "date": "2024-03-28",
+            "time": "10:30 AM"
+          },
+          "visitH8": {
+            "reason": "Cold Symptoms",
+            "results": "Advised rest and hydration",
+            "date": "2024-04-05",
+            "time": "09:00 AM"
+          },
+          "visitH9": {
+            "reason": "Sore Throat",
+            "results": "Prescribed antibiotics",
+            "date": "2024-04-12",
+            "time": "11:30 AM"
+          },
+          "visitH10": {
+            "reason": "Flu Vaccine",
+            "results": "Administered",
+            "date": "2024-04-25",
+            "time": "10:00 AM"
+          },
+          "visitH11": {
+            "reason": "Follow-up for Sore Throat",
+            "results": "Cleared",
+            "date": "2024-05-01",
+            "time": "09:00 AM"
+          },
+          "visitH12": {
+            "reason": "Foot Pain",
+            "results": "Referred to podiatry",
+            "date": "2024-05-10",
+            "time": "02:00 PM"
+          },
+          "visitH13": {
+            "reason": "Podiatry Consultation",
+            "results": "Orthotics prescribed",
+            "date": "2024-05-15",
+            "time": "11:00 AM"
+          },
+          "visitH14": {
+            "reason": "Follow-up for Foot Pain",
+            "results": "Improvement noted",
+            "date": "2024-05-30",
+            "time": "10:30 AM"
+          },
+          "visitH15": {
+            "reason": "Chest Pain",
+            "results": "EKG scheduled",
+            "date": "2024-06-10",
+            "time": "09:00 AM"
+          },
+          "visitH16": {
+            "reason": "EKG Results",
+            "results": "No abnormalities",
+            "date": "2024-06-15",
+            "time": "10:00 AM"
+          },
+          "visitH17": {
+            "reason": "High Blood Pressure",
+            "results": "Medication prescribed",
+            "date": "2024-07-01",
+            "time": "09:30 AM"
+          },
+          "visitH18": {
+            "reason": "Routine Follow-up for Blood Pressure",
+            "results": "Stable",
+            "date": "2024-07-15",
+            "time": "11:00 AM"
+          },
+          "visitH19": {
+            "reason": "Back Pain",
+            "results": "Referred to physical therapy",
+            "date": "2024-08-01",
+            "time": "10:00 AM"
+          },
+          "visitH20": {
+            "reason": "Physical Therapy Session 1",
+            "results": "Initial assessment done",
+            "date": "2024-08-10",
+            "time": "09:00 AM"
+          },
+          "visitH21": {
+            "reason": "Physical Therapy Session 2",
+            "results": "Improvement noted",
+            "date": "2024-08-20",
+            "time": "09:30 AM"
+          },
+          "visitH22": {
+            "reason": "Follow-up for High Blood Pressure",
+            "results": "Blood pressure normal",
+            "date": "2024-09-01",
+            "time": "09:00 AM"
+          },
+          "visitH23": {
+            "reason": "Follow-up for Back Pain",
+            "results": "Back pain improving",
+            "date": "2024-09-15",
+            "time": "10:00 AM"
+          },
+          "visitH24": {
+            "reason": "Cold Symptoms",
+            "results": "Prescribed decongestants",
+            "date": "2024-10-01",
+            "time": "09:00 AM"
+          },
+          "visitH25": {
+            "reason": "Follow-up for Cold",
+            "results": "Symptoms cleared",
+            "date": "2024-10-10",
+            "time": "11:30 AM"
+          },
+          "visitH26": {
+            "reason": "Migraine",
+            "results": "Prescribed triptans",
+            "date": "2024-10-20",
+            "time": "10:00 AM"
+          },
+          "visitH27": {
+            "reason": "Follow-up for Migraine",
+            "results": "Improving",
+            "date": "2024-11-01",
+            "time": "09:00 AM"
+          },
+          "visitH28": {
+            "reason": "Sprained Wrist",
+            "results": "Splint applied",
+            "date": "2024-11-10",
+            "time": "02:00 PM"
+          },
+          "visitH29": {
+            "reason": "Follow-up for Sprained Wrist",
+            "results": "Healing well",
+            "date": "2024-11-20",
+            "time": "10:00 AM"
+          },
+          "visitH30": {
+            "reason": "Flu Symptoms",
+            "results": "Prescribed flu treatment",
+            "date": "2024-12-01",
+            "time": "09:30 AM"
+          },
+          "visitH31": {
+            "reason": "Follow-up for Flu",
+            "results": "Recovered",
+            "date": "2024-12-10",
+            "time": "09:00 AM"
+          },
+          "visitH32": {
+            "reason": "Sore Throat",
+            "results": "Prescribed lozenges",
+            "date": "2024-12-20",
+            "time": "11:30 AM"
+          },
+          "visitH33": {
+            "reason": "Joint Pain",
+            "results": "Referred to rheumatologist",
+            "date": "2025-01-05",
+            "time": "09:30 AM"
+          },
+          "visitH34": {
+            "reason": "Rheumatology Consultation",
+            "results": "Arthritis diagnosed",
+            "date": "2025-01-15",
+            "time": "10:00 AM"
+          },
+          "visitH35": {
+            "reason": "Follow-up for Arthritis",
+            "results": "Medication prescribed",
+            "date": "2025-01-25",
+            "time": "09:00 AM"
+          }
+        },
+        "Prescriptions": {
+          "presH1": {
+            "name": "Ibuprofen",
+            "dosage": "400 mg",
+            "startDate": "2024-03-15",
+            "duration": "5",
+            "recurring": false,
+            "expirationDate": "2024-03-20"
+          },
+          "presH2": {
+            "name": "Antihistamines",
+            "dosage": "10 mg",
+            "startDate": "2024-03-01",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-03-31"
+          },
+          "presH3": {
+            "name": "Flu Medication",
+            "dosage": "2 tablets daily",
+            "startDate": "2024-01-25",
+            "duration": "10",
+            "recurring": false,
+            "expirationDate": "2024-02-04"
+          },
+          "presH4": {
+            "name": "Lisinopril",
+            "dosage": "10 mg",
+            "startDate": "2024-07-01",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-08-01"
+          }
+        },
+        "Financial": {
+          "cardH1": {
+            "cardHolderName": "David Johnson",
+            "cardNumber": "4321567890123456",
+            "expiryDate": "05/26",
+            "cvv": "321"
+          },
+          "cardH2": {
+            "cardHolderName": "David Johnson",
+            "cardNumber": "9876543210123456",
+            "expiryDate": "11/24",
+            "cvv": "654"
+          }
+        }
+      }
+    }
+  }
+  

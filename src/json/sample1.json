@@ -1,6 +1,6 @@
 {
     "patients": {
-      "uid12345": {
+      "uid12345903412345678": {
         "Personal": {
           "Details": {
             "name": "John Doe",
@@ -17,23 +17,21 @@
           }
         },
         "MedicalVisits": {
-          "visit1": {
+          "uid123459032357834567": {
             "reason": "Checkup",
-            "prescription": "Tylenol",
             "results": "All clear",
             "date": "2024-10-01",
             "time": "09:00 AM"
           },
-          "visit2": {
+          "uid123927452357834567": {
             "reason": "Flu Symptoms",
-            "prescription": "Amoxicillin",
             "results": "Fever reduced",
             "date": "2024-10-15",
             "time": "01:00 PM"
           }
         },
         "Prescriptions": {
-          "prescription1": {
+          "uid123459032345834567": {
             "name": "Tylenol",
             "dosage": "500 mg",
             "startDate": "2024-10-01",
@@ -41,7 +39,7 @@
             "recurring": false,
             "expirationDate": "2024-10-08"
           },
-          "prescription2": {
+          "uid1234590323982317344": {
             "name": "Amoxicillin",
             "dosage": "250 mg twice a day",
             "startDate": "2024-10-10",

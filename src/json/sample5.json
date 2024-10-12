@@ -1,61 +1,309 @@
 {
     "patients": {
-      "uid19283": {
+      "uidD12345903412345784": {
         "Personal": {
           "Details": {
-            "name": "Chris Lee",
-            "DOB": "1995-04-18",
-            "email": "chrisl@example.com",
-            "phoneNumber": "555-9999",
-            "address": "202 Birch St, Central City",
-            "emergencyContact": "Lee Chen - 555-1111",
-            "patientPhoto": "https://example.com/photos/chrisl.jpg",
-            "insuranceProvider": "MedPlus",
-            "insurancePolicy": "MP11223344",
-            "insurancePhoto": "https://example.com/photos/insurance_chrisl.jpg",
-            "physician": "Dr. Grey"
+            "name": "James Wilson",
+            "DOB": "1988-11-02",
+            "email": "jameswilson@example.com",
+            "phoneNumber": "555-9870",
+            "address": "678 Birch Road, Woodville",
+            "emergencyContact": "Lucy Wilson - 555-2345",
+            "patientPhoto": "https://example.com/photos/james.jpg",
+            "insuranceProvider": "Aetna",
+            "insurancePolicy": "AT987654321",
+            "insurancePhoto": "https://example.com/photos/insurance_james.jpg",
+            "physician": "Dr. Walker"
           }
         },
         "MedicalVisits": {
-          "visit1": {
-            "reason": "Vaccination",
-            "prescription": "COVID-19 Vaccine",
-            "results": "Vaccinated successfully",
+          "visitD1": {
+            "reason": "Annual Physical",
+            "results": "All clear",
+            "date": "2024-01-05",
+            "time": "10:00 AM"
+          },
+          "visitD2": {
+            "reason": "High Blood Pressure",
+            "results": "Medication adjusted",
+            "date": "2024-01-15",
+            "time": "11:00 AM"
+          },
+          "visitD3": {
+            "reason": "Chest Pain",
+            "results": "EKG scheduled",
+            "date": "2024-02-02",
+            "time": "12:30 PM"
+          },
+          "visitD4": {
+            "reason": "Follow-up after EKG",
+            "results": "No abnormalities",
+            "date": "2024-02-10",
+            "time": "09:00 AM"
+          },
+          "visitD5": {
+            "reason": "Flu Symptoms",
+            "results": "Prescribed flu treatment",
+            "date": "2024-02-25",
+            "time": "10:30 AM"
+          },
+          "visitD6": {
+            "reason": "Back Pain",
+            "results": "Referred to physical therapy",
+            "date": "2024-03-05",
+            "time": "09:30 AM"
+          },
+          "visitD7": {
+            "reason": "Physical Therapy Session 1",
+            "results": "Initial assessment done",
+            "date": "2024-03-12",
+            "time": "10:00 AM"
+          },
+          "visitD8": {
+            "reason": "Physical Therapy Session 2",
+            "results": "Mobility improving",
+            "date": "2024-03-19",
+            "time": "09:00 AM"
+          },
+          "visitD9": {
+            "reason": "Sore Throat",
+            "results": "Prescribed antibiotics",
+            "date": "2024-03-30",
+            "time": "11:00 AM"
+          },
+          "visitD10": {
+            "reason": "Follow-up for High Blood Pressure",
+            "results": "Blood pressure stable",
+            "date": "2024-04-05",
+            "time": "09:00 AM"
+          },
+          "visitD11": {
+            "reason": "Seasonal Allergies",
+            "results": "Antihistamine prescribed",
+            "date": "2024-04-15",
+            "time": "01:00 PM"
+          },
+          "visitD12": {
+            "reason": "Cough",
+            "results": "Prescribed cough suppressant",
+            "date": "2024-04-30",
+            "time": "11:00 AM"
+          },
+          "visitD13": {
+            "reason": "Follow-up for Flu",
+            "results": "Recovery progressing",
+            "date": "2024-05-05",
+            "time": "10:00 AM"
+          },
+          "visitD14": {
+            "reason": "Ankle Pain",
+            "results": "Referred to orthopedics",
+            "date": "2024-05-15",
+            "time": "11:00 AM"
+          },
+          "visitD15": {
+            "reason": "Orthopedic Consultation",
+            "results": "Sprain confirmed",
+            "date": "2024-05-20",
+            "time": "12:00 PM"
+          },
+          "visitD16": {
+            "reason": "Follow-up for Ankle Sprain",
+            "results": "Improvement with rest",
+            "date": "2024-06-01",
+            "time": "10:30 AM"
+          },
+          "visitD17": {
+            "reason": "Headache",
+            "results": "Advised over-the-counter pain relief",
+            "date": "2024-06-12",
+            "time": "09:00 AM"
+          },
+          "visitD18": {
+            "reason": "Stomach Pain",
+            "results": "Ultrasound scheduled",
+            "date": "2024-06-25",
+            "time": "01:00 PM"
+          },
+          "visitD19": {
+            "reason": "Ultrasound Results",
+            "results": "No issues found",
+            "date": "2024-06-30",
+            "time": "10:00 AM"
+          },
+          "visitD20": {
+            "reason": "Foot Pain",
+            "results": "Prescribed orthotics",
+            "date": "2024-07-10",
+            "time": "09:00 AM"
+          },
+          "visitD21": {
+            "reason": "Skin Rash",
+            "results": "Topical cream prescribed",
+            "date": "2024-07-20",
+            "time": "12:00 PM"
+          },
+          "visitD22": {
+            "reason": "Follow-up for Skin Rash",
+            "results": "Improving",
+            "date": "2024-07-30",
+            "time": "11:30 AM"
+          },
+          "visitD23": {
+            "reason": "Fatigue",
+            "results": "Blood test ordered",
+            "date": "2024-08-05",
+            "time": "10:00 AM"
+          },
+          "visitD24": {
+            "reason": "Blood Test Results",
+            "results": "Iron levels low",
+            "date": "2024-08-12",
+            "time": "09:30 AM"
+          },
+          "visitD25": {
+            "reason": "Follow-up for Low Iron",
+            "results": "Iron supplements prescribed",
+            "date": "2024-08-25",
+            "time": "10:00 AM"
+          },
+          "visitD26": {
+            "reason": "Migraine",
+            "results": "Prescribed triptans",
+            "date": "2024-09-01",
+            "time": "02:00 PM"
+          },
+          "visitD27": {
+            "reason": "Follow-up for Migraine",
+            "results": "Symptoms improving",
+            "date": "2024-09-10",
+            "time": "11:30 AM"
+          },
+          "visitD28": {
+            "reason": "Flu Shot",
+            "results": "Administered",
             "date": "2024-09-15",
             "time": "10:00 AM"
           },
-          "visit2": {
-            "reason": "Flu Symptoms",
-            "prescription": "Tamiflu",
-            "results": "Symptoms reduced",
+          "visitD29": {
+            "reason": "Dizziness",
+            "results": "Blood pressure monitored",
+            "date": "2024-09-25",
+            "time": "12:00 PM"
+          },
+          "visitD30": {
+            "reason": "Joint Pain",
+            "results": "Referred to rheumatologist",
             "date": "2024-10-05",
+            "time": "09:00 AM"
+          },
+          "visitD31": {
+            "reason": "Rheumatology Consultation",
+            "results": "Arthritis confirmed",
+            "date": "2024-10-10",
             "time": "11:30 AM"
+          },
+          "visitD32": {
+            "reason": "Follow-up for Arthritis",
+            "results": "Medication prescribed",
+            "date": "2024-10-20",
+            "time": "10:00 AM"
+          },
+          "visitD33": {
+            "reason": "Chest Pain",
+            "results": "Referred to cardiologist",
+            "date": "2024-11-01",
+            "time": "09:30 AM"
+          },
+          "visitD34": {
+            "reason": "Cardiology Consultation",
+            "results": "Stress test ordered",
+            "date": "2024-11-05",
+            "time": "11:00 AM"
+          },
+          "visitD35": {
+            "reason": "Stress Test",
+            "results": "Normal",
+            "date": "2024-11-12",
+            "time": "10:00 AM"
+          },
+          "visitD36": {
+            "reason": "Routine Checkup",
+            "results": "No issues",
+            "date": "2024-11-20",
+            "time": "09:00 AM"
+          },
+          "visitD37": {
+            "reason": "Follow-up for Joint Pain",
+            "results": "Symptoms improving",
+            "date": "2024-12-01",
+            "time": "10:30 AM"
+          },
+          "visitD38": {
+            "reason": "Ear Pain",
+            "results": "Ear infection diagnosed",
+            "date": "2024-12-10",
+            "time": "12:00 PM"
+          },
+          "visitD39": {
+            "reason": "Follow-up for Ear Infection",
+            "results": "Cleared",
+            "date": "2024-12-20",
+            "time": "11:30 AM"
+          },
+          "visitD40": {
+            "reason": "Routine Blood Work",
+            "results": "All clear",
+            "date": "2024-12-28",
+            "time": "09:00 AM"
           }
         },
         "Prescriptions": {
-          "prescription1": {
-            "name": "COVID-19 Vaccine",
-            "dosage": "One dose",
-            "startDate": "2024-09-15",
-            "duration": "1",
-            "recurring": false,
-            "expirationDate": "2024-09-16"
+          "presD1": {
+            "name": "Lisinopril",
+            "dosage": "10 mg",
+            "startDate": "2024-01-15",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-02-15"
           },
-          "prescription2": {
-            "name": "Tamiflu",
-            "dosage": "75 mg twice a day",
-            "startDate": "2024-10-05",
-            "duration": "5",
+          "presD2": {
+            "name": "Triptans",
+            "dosage": "50 mg",
+            "startDate": "2024-09-01",
+            "duration": "14",
             "recurring": false,
-            "expirationDate": "2024-10-10"
+            "expirationDate": "2024-09-15"
+          },
+          "presD3": {
+            "name": "Antihistamine",
+            "dosage": "10 mg",
+            "startDate": "2024-04-15",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-05-15"
+          },
+          "presD4": {
+            "name": "Ibuprofen",
+            "dosage": "400 mg",
+            "startDate": "2024-06-12",
+            "duration": "7",
+            "recurring": false,
+            "expirationDate": "2024-06-19"
           }
         },
         "Financial": {
-          "card7890": {
-            "cardHolderName": "Chris Lee",
-            "cardNumber": "7890789078907890",
-            "expiryDate": "03/24",
-            "cvv": "345"
+          "cardD1": {
+            "cardHolderName": "James Wilson",
+            "cardNumber": "5432109876543210",
+            "expiryDate": "11/26",
+            "cvv": "321"
+          },
+          "cardD2": {
+            "cardHolderName": "James Wilson",
+            "cardNumber": "0987654321098765",
+            "expiryDate": "08/27",
+            "cvv": "456"
           }
         }
       }

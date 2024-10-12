@@ -1,0 +1,134 @@
+{
+    "patients": {
+      "uidE12345903412345785": {
+        "Personal": {
+          "Details": {
+            "name": "Sarah Johnson",
+            "DOB": "1995-09-10",
+            "email": "sarahjohnson@example.com",
+            "phoneNumber": "555-1122",
+            "address": "23 Cedar Drive, Lakeside",
+            "emergencyContact": "David Johnson - 555-3344",
+            "patientPhoto": "https://example.com/photos/sarah.jpg",
+            "insuranceProvider": "Cigna",
+            "insurancePolicy": "CG654321098",
+            "insurancePhoto": "https://example.com/photos/insurance_sarah.jpg",
+            "physician": "Dr. Adams"
+          }
+        },
+        "MedicalVisits": {
+          "visitE1": {
+            "reason": "Annual Physical",
+            "results": "Healthy",
+            "date": "2024-01-15",
+            "time": "09:00 AM"
+          },
+          "visitE2": {
+            "reason": "Cold Symptoms",
+            "results": "Prescribed decongestants",
+            "date": "2024-02-01",
+            "time": "10:30 AM"
+          },
+          "visitE3": {
+            "reason": "Back Pain",
+            "results": "Advised stretching exercises",
+            "date": "2024-03-10",
+            "time": "11:00 AM"
+          },
+          "visitE4": {
+            "reason": "Seasonal Allergies",
+            "results": "Antihistamines prescribed",
+            "date": "2024-04-05",
+            "time": "01:00 PM"
+          },
+          "visitE5": {
+            "reason": "Headache",
+            "results": "Prescribed ibuprofen",
+            "date": "2024-04-18",
+            "time": "02:30 PM"
+          },
+          "visitE6": {
+            "reason": "Routine Follow-up",
+            "results": "Health stable",
+            "date": "2024-05-01",
+            "time": "09:00 AM"
+          },
+          "visitE7": {
+            "reason": "Flu Vaccine",
+            "results": "Administered",
+            "date": "2024-05-15",
+            "time": "11:00 AM"
+          },
+          "visitE8": {
+            "reason": "Sore Throat",
+            "results": "Prescribed lozenges",
+            "date": "2024-06-02",
+            "time": "10:00 AM"
+          },
+          "visitE9": {
+            "reason": "Fever",
+            "results": "Suspected viral infection",
+            "date": "2024-06-18",
+            "time": "11:30 AM"
+          },
+          "visitE10": {
+            "reason": "Follow-up for Fever",
+            "results": "Fully recovered",
+            "date": "2024-07-01",
+            "time": "09:00 AM"
+          },
+          "visitE11": {
+            "reason": "Chest Pain",
+            "results": "EKG scheduled",
+            "date": "2024-07-15",
+            "time": "01:00 PM"
+          },
+          "visitE12": {
+            "reason": "EKG Results",
+            "results": "Normal",
+            "date": "2024-07-22",
+            "time": "10:00 AM"
+          },
+          "visitE13": {
+            "reason": "Stomach Pain",
+            "results": "Prescribed antacids",
+            "date": "2024-08-05",
+            "time": "11:00 AM"
+          },
+          "visitE14": {
+            "reason": "Routine Checkup",
+            "results": "No issues",
+            "date": "2024-09-01",
+            "time": "09:00 AM"
+          }
+        },
+        "Prescriptions": {
+          "presE1": {
+            "name": "Ibuprofen",
+            "dosage": "400 mg",
+            "startDate": "2024-04-18",
+            "duration": "5",
+            "recurring": false,
+            "expirationDate": "2024-04-23"
+          },
+          "presE2": {
+            "name": "Antihistamines",
+            "dosage": "10 mg",
+            "startDate": "2024-04-05",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-05-05"
+          }
+        },
+        "Financial": {
+          "cardE1": {
+            "cardHolderName": "Sarah Johnson",
+            "cardNumber": "5678123456781234",
+            "expiryDate": "09/26",
+            "cvv": "789"
+          }
+        }
+      }
+    }
+  }
+  

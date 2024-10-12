@@ -1,61 +1,279 @@
 {
     "patients": {
-      "uid54321": {
+      "uidB12345903412345782": {
         "Personal": {
           "Details": {
-            "name": "Alex Johnson",
-            "DOB": "1992-03-25",
-            "email": "alexj@example.com",
-            "phoneNumber": "555-6789",
-            "address": "789 Pine St, Gotham",
-            "emergencyContact": "Sarah Johnson - 555-8765",
-            "patientPhoto": "https://example.com/photos/alexj.jpg",
-            "insuranceProvider": "CareFirst",
-            "insurancePolicy": "CF34567890",
-            "insurancePhoto": "https://example.com/photos/insurance_alexj.jpg",
-            "physician": "Dr. Black"
+            "name": "Michael Brown",
+            "DOB": "1978-03-11",
+            "email": "michaelbrown@example.com",
+            "phoneNumber": "555-9876",
+            "address": "789 Pine St, Riverdale",
+            "emergencyContact": "Samantha Brown - 555-6543",
+            "patientPhoto": "https://example.com/photos/michael.jpg",
+            "insuranceProvider": "Blue Shield",
+            "insurancePolicy": "BS765432109",
+            "insurancePhoto": "https://example.com/photos/insurance_michael.jpg",
+            "physician": "Dr. Harris"
           }
         },
         "MedicalVisits": {
-          "visit1": {
-            "reason": "Injury",
-            "prescription": "Ibuprofen",
-            "results": "Healing well",
-            "date": "2024-08-15",
-            "time": "03:00 PM"
+          "visitB1": {
+            "reason": "Sprained Ankle",
+            "results": "Rest and ice",
+            "date": "2024-01-03",
+            "time": "10:00 AM"
           },
-          "visit2": {
-            "reason": "Chronic Condition Follow-up",
-            "prescription": "Metformin",
-            "results": "Condition stable",
+          "visitB2": {
+            "reason": "Cold Symptoms",
+            "results": "Advised bed rest",
+            "date": "2024-01-15",
+            "time": "11:30 AM"
+          },
+          "visitB3": {
+            "reason": "Annual Physical",
+            "results": "Healthy, continue current medications",
+            "date": "2024-02-01",
+            "time": "09:00 AM"
+          },
+          "visitB4": {
+            "reason": "High Blood Pressure",
+            "results": "Increased dosage of medication",
+            "date": "2024-02-14",
+            "time": "02:00 PM"
+          },
+          "visitB5": {
+            "reason": "Flu Vaccine",
+            "results": "Administered",
+            "date": "2024-02-28",
+            "time": "09:00 AM"
+          },
+          "visitB6": {
+            "reason": "Lower Back Pain",
+            "results": "Prescribed muscle relaxers",
+            "date": "2024-03-10",
+            "time": "10:45 AM"
+          },
+          "visitB7": {
+            "reason": "Follow-up for Back Pain",
+            "results": "Symptoms improved",
+            "date": "2024-03-25",
+            "time": "09:30 AM"
+          },
+          "visitB8": {
+            "reason": "Sore Throat",
+            "results": "Prescribed antibiotics",
+            "date": "2024-04-01",
+            "time": "11:00 AM"
+          },
+          "visitB9": {
+            "reason": "Seasonal Allergies",
+            "results": "Prescribed antihistamines",
+            "date": "2024-04-20",
+            "time": "01:00 PM"
+          },
+          "visitB10": {
+            "reason": "Follow-up for High Blood Pressure",
+            "results": "BP controlled",
+            "date": "2024-05-05",
+            "time": "09:30 AM"
+          },
+          "visitB11": {
+            "reason": "Chest Pain",
+            "results": "Referred to cardiologist",
+            "date": "2024-05-15",
+            "time": "10:00 AM"
+          },
+          "visitB12": {
+            "reason": "Cardiology Consultation",
+            "results": "EKG ordered",
+            "date": "2024-05-20",
+            "time": "11:00 AM"
+          },
+          "visitB13": {
+            "reason": "EKG Test",
+            "results": "Normal",
+            "date": "2024-05-25",
+            "time": "12:30 PM"
+          },
+          "visitB14": {
+            "reason": "Routine Follow-up",
+            "results": "Stable health",
+            "date": "2024-06-05",
+            "time": "09:00 AM"
+          },
+          "visitB15": {
+            "reason": "Migraine Headache",
+            "results": "Prescribed triptans",
+            "date": "2024-06-12",
+            "time": "01:00 PM"
+          },
+          "visitB16": {
+            "reason": "Physical Therapy",
+            "results": "For ankle recovery",
+            "date": "2024-06-25",
+            "time": "09:00 AM"
+          },
+          "visitB17": {
+            "reason": "Follow-up for Migraine",
+            "results": "Headaches decreased",
+            "date": "2024-07-02",
+            "time": "10:00 AM"
+          },
+          "visitB18": {
+            "reason": "Checkup",
+            "results": "No significant issues",
+            "date": "2024-07-18",
+            "time": "09:30 AM"
+          },
+          "visitB19": {
+            "reason": "Foot Pain",
+            "results": "Prescribed orthotics",
+            "date": "2024-08-03",
+            "time": "10:00 AM"
+          },
+          "visitB20": {
+            "reason": "Follow-up for Foot Pain",
+            "results": "Improved with orthotics",
+            "date": "2024-08-15",
+            "time": "11:00 AM"
+          },
+          "visitB21": {
+            "reason": "Dizziness",
+            "results": "Blood test ordered",
+            "date": "2024-08-30",
+            "time": "09:00 AM"
+          },
+          "visitB22": {
+            "reason": "Blood Test Results",
+            "results": "Normal",
+            "date": "2024-09-05",
+            "time": "08:30 AM"
+          },
+          "visitB23": {
+            "reason": "Ear Infection",
+            "results": "Prescribed antibiotics",
+            "date": "2024-09-18",
+            "time": "01:00 PM"
+          },
+          "visitB24": {
+            "reason": "Routine Follow-up",
+            "results": "Health stable",
             "date": "2024-09-30",
+            "time": "10:30 AM"
+          },
+          "visitB25": {
+            "reason": "Cough",
+            "results": "Prescribed cough syrup",
+            "date": "2024-10-05",
+            "time": "11:30 AM"
+          },
+          "visitB26": {
+            "reason": "Fever",
+            "results": "Suspected viral infection",
+            "date": "2024-10-10",
+            "time": "09:30 AM"
+          },
+          "visitB27": {
+            "reason": "Eye Infection",
+            "results": "Prescribed eye drops",
+            "date": "2024-10-15",
             "time": "12:00 PM"
+          },
+          "visitB28": {
+            "reason": "Joint Pain",
+            "results": "Referred to specialist",
+            "date": "2024-10-20",
+            "time": "02:00 PM"
+          },
+          "visitB29": {
+            "reason": "Dermatology Consultation",
+            "results": "Rash diagnosed as eczema",
+            "date": "2024-10-25",
+            "time": "09:00 AM"
+          },
+          "visitB30": {
+            "reason": "Follow-up for Eczema",
+            "results": "Improved with cream",
+            "date": "2024-10-28",
+            "time": "01:00 PM"
+          },
+          "visitB31": {
+            "reason": "Physical Therapy",
+            "results": "For joint recovery",
+            "date": "2024-11-01",
+            "time": "10:30 AM"
+          },
+          "visitB32": {
+            "reason": "Checkup",
+            "results": "All clear",
+            "date": "2024-11-10",
+            "time": "09:00 AM"
           }
         },
         "Prescriptions": {
-          "prescription1": {
-            "name": "Ibuprofen",
-            "dosage": "400 mg as needed",
-            "startDate": "2024-08-15",
-            "duration": "14",
-            "recurring": false,
-            "expirationDate": "2024-08-29"
-          },
-          "prescription2": {
-            "name": "Metformin",
-            "dosage": "500 mg twice a day",
-            "startDate": "2024-09-30",
+          "presB1": {
+            "name": "Lisinopril",
+            "dosage": "10 mg",
+            "startDate": "2024-02-14",
             "duration": "30",
             "recurring": true,
-            "expirationDate": null
+            "expirationDate": "2024-03-14"
+          },
+          "presB2": {
+            "name": "Ibuprofen",
+            "dosage": "400 mg",
+            "startDate": "2024-03-10",
+            "duration": "5",
+            "recurring": false,
+            "expirationDate": "2024-03-15"
+          },
+          "presB3": {
+            "name": "Antibiotic",
+            "dosage": "500 mg",
+            "startDate": "2024-04-01",
+            "duration": "10",
+            "recurring": false,
+            "expirationDate": "2024-04-11"
+          },
+          "presB4": {
+            "name": "Cough Syrup",
+            "dosage": "5 ml",
+            "startDate": "2024-10-05",
+            "duration": "7",
+            "recurring": false,
+            "expirationDate": "2024-10-12"
+          },
+          "presB5": {
+            "name": "Antihistamine",
+            "dosage": "10 mg",
+            "startDate": "2024-04-20",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-05-20"
+          },
+          "presB6": {
+            "name": "Eye Drops",
+            "dosage": "2 drops",
+            "startDate": "2024-10-15",
+            "duration": "7",
+            "recurring": false,
+            "expirationDate": "2024-10-22"
+          },
+          "presB7": {
+            "name": "Topical Cream",
+            "dosage": "Apply twice daily",
+            "startDate": "2024-10-25",
+            "duration": "14",
+            "recurring": false,
+            "expirationDate": "2024-11-08"
           }
         },
         "Financial": {
-          "card9012": {
-            "cardHolderName": "Alex Johnson",
-            "cardNumber": "9012901290129012",
-            "expiryDate": "06/27",
-            "cvv": "789"
+          "cardB1": {
+            "cardHolderName": "Michael Brown",
+            "cardNumber": "2345678901234567",
+            "expiryDate": "03/26",
+            "cvv": "321"
           }
         }
       }

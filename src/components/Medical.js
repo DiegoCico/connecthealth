@@ -191,15 +191,17 @@ const Medical = ({ uid }) => {
                   ))}
                 </select>
               </label>
-              <br />
-              <label>
-                Prescription:
-                <input type="text" name="prescription" value={visitData.prescription} onChange={handleInputChange} />
-              </label>
-              <br />
+              <br>
+              </br>
               <label>
                 Results:
-                <input type="text" name="results" value={visitData.results} onChange={handleInputChange} />
+                <textarea
+                  name="results"
+                  value={visitData.results}
+                  onChange={handleInputChange}
+                  rows="4" // You can adjust the number of rows to control the height
+                  style={{ width: '100%' }} // This ensures it takes up the full width of the form
+                />
               </label>
               <br />
               <button onClick={saveVisit}>Done</button>

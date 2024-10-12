@@ -1,61 +1,267 @@
 {
     "patients": {
-      "uid98765": {
+      "uidC12345903412345783": {
         "Personal": {
           "Details": {
-            "name": "Emily Brown",
-            "DOB": "1988-11-05",
-            "email": "emilyb@example.com",
-            "phoneNumber": "555-4321",
-            "address": "101 Maple St, Star City",
-            "emergencyContact": "Robert Brown - 555-6789",
-            "patientPhoto": "https://example.com/photos/emilyb.jpg",
-            "insuranceProvider": "HealthyCare",
-            "insurancePolicy": "HC76543210",
-            "insurancePhoto": "https://example.com/photos/insurance_emilyb.jpg",
-            "physician": "Dr. White"
+            "name": "Emily Davis",
+            "DOB": "1992-05-17",
+            "email": "emilydavis@example.com",
+            "phoneNumber": "555-6789",
+            "address": "456 Oak Lane, Greentown",
+            "emergencyContact": "Ryan Davis - 555-1234",
+            "patientPhoto": "https://example.com/photos/emily.jpg",
+            "insuranceProvider": "United Health",
+            "insurancePolicy": "UH123456789",
+            "insurancePhoto": "https://example.com/photos/insurance_emily.jpg",
+            "physician": "Dr. Lee"
           }
         },
         "MedicalVisits": {
-          "visit1": {
-            "reason": "Skin Rash",
-            "prescription": "Hydrocortisone Cream",
-            "results": "Rash clearing up",
-            "date": "2024-07-05",
-            "time": "02:00 PM"
-          },
-          "visit2": {
-            "reason": "Blood Pressure Check",
-            "prescription": "Amlodipine",
-            "results": "Pressure normal",
-            "date": "2024-10-10",
+          "visitC1": {
+            "reason": "Annual Physical",
+            "results": "All clear",
+            "date": "2024-01-12",
             "time": "09:00 AM"
+          },
+          "visitC2": {
+            "reason": "Cold Symptoms",
+            "results": "Prescribed decongestants",
+            "date": "2024-02-05",
+            "time": "02:30 PM"
+          },
+          "visitC3": {
+            "reason": "Sore Throat",
+            "results": "Advised to rest",
+            "date": "2024-02-12",
+            "time": "11:00 AM"
+          },
+          "visitC4": {
+            "reason": "Flu Vaccine",
+            "results": "Administered",
+            "date": "2024-03-01",
+            "time": "10:00 AM"
+          },
+          "visitC5": {
+            "reason": "Back Pain",
+            "results": "Prescribed pain relief",
+            "date": "2024-03-15",
+            "time": "01:30 PM"
+          },
+          "visitC6": {
+            "reason": "Follow-up for Back Pain",
+            "results": "Improvement",
+            "date": "2024-03-29",
+            "time": "09:30 AM"
+          },
+          "visitC7": {
+            "reason": "Seasonal Allergies",
+            "results": "Antihistamine prescribed",
+            "date": "2024-04-10",
+            "time": "12:00 PM"
+          },
+          "visitC8": {
+            "reason": "Headache",
+            "results": "Advised hydration",
+            "date": "2024-04-22",
+            "time": "03:00 PM"
+          },
+          "visitC9": {
+            "reason": "Fever",
+            "results": "Suspected viral infection",
+            "date": "2024-05-05",
+            "time": "09:00 AM"
+          },
+          "visitC10": {
+            "reason": "Chest Pain",
+            "results": "EKG ordered",
+            "date": "2024-05-18",
+            "time": "11:30 AM"
+          },
+          "visitC11": {
+            "reason": "EKG Results",
+            "results": "No abnormalities",
+            "date": "2024-05-20",
+            "time": "10:00 AM"
+          },
+          "visitC12": {
+            "reason": "Fatigue",
+            "results": "Blood test ordered",
+            "date": "2024-06-01",
+            "time": "01:00 PM"
+          },
+          "visitC13": {
+            "reason": "Blood Test Results",
+            "results": "Low iron",
+            "date": "2024-06-05",
+            "time": "09:00 AM"
+          },
+          "visitC14": {
+            "reason": "Follow-up for Low Iron",
+            "results": "Iron supplements prescribed",
+            "date": "2024-06-15",
+            "time": "09:30 AM"
+          },
+          "visitC15": {
+            "reason": "Migraine",
+            "results": "Triptans prescribed",
+            "date": "2024-07-02",
+            "time": "10:30 AM"
+          },
+          "visitC16": {
+            "reason": "Follow-up for Migraine",
+            "results": "Symptoms improving",
+            "date": "2024-07-18",
+            "time": "01:00 PM"
+          },
+          "visitC17": {
+            "reason": "Foot Pain",
+            "results": "Advised rest",
+            "date": "2024-08-03",
+            "time": "11:00 AM"
+          },
+          "visitC18": {
+            "reason": "Sprained Wrist",
+            "results": "Splint applied",
+            "date": "2024-08-15",
+            "time": "12:30 PM"
+          },
+          "visitC19": {
+            "reason": "Follow-up for Wrist",
+            "results": "Healing well",
+            "date": "2024-08-30",
+            "time": "09:30 AM"
+          },
+          "visitC20": {
+            "reason": "Joint Pain",
+            "results": "Referred to specialist",
+            "date": "2024-09-10",
+            "time": "10:00 AM"
+          },
+          "visitC21": {
+            "reason": "Specialist Consultation",
+            "results": "Arthritis diagnosed",
+            "date": "2024-09-20",
+            "time": "11:00 AM"
+          },
+          "visitC22": {
+            "reason": "Flu Shot",
+            "results": "Administered",
+            "date": "2024-10-01",
+            "time": "09:30 AM"
           }
         },
         "Prescriptions": {
-          "prescription1": {
-            "name": "Hydrocortisone Cream",
-            "dosage": "Apply twice a day",
-            "startDate": "2024-07-05",
-            "duration": "14",
+          "presC1": {
+            "name": "Ibuprofen",
+            "dosage": "200 mg",
+            "startDate": "2024-03-15",
+            "duration": "7",
             "recurring": false,
-            "expirationDate": "2024-07-19"
+            "expirationDate": "2024-03-22"
           },
-          "prescription2": {
-            "name": "Amlodipine",
-            "dosage": "5 mg daily",
-            "startDate": "2024-10-10",
+          "presC2": {
+            "name": "Iron Supplement",
+            "dosage": "325 mg",
+            "startDate": "2024-06-15",
             "duration": "30",
             "recurring": true,
-            "expirationDate": null
+            "expirationDate": "2024-07-15"
+          },
+          "presC3": {
+            "name": "Triptans",
+            "dosage": "50 mg",
+            "startDate": "2024-07-02",
+            "duration": "10",
+            "recurring": false,
+            "expirationDate": "2024-07-12"
+          },
+          "presC4": {
+            "name": "Amoxicillin",
+            "dosage": "500 mg twice daily",
+            "startDate": "2024-04-01",
+            "duration": "10",
+            "recurring": false,
+            "expirationDate": "2024-04-11"
+          },
+          "presC5": {
+            "name": "Nasal Spray",
+            "dosage": "2 sprays",
+            "startDate": "2024-04-10",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-05-10"
+          },
+          "presC6": {
+            "name": "Muscle Relaxer",
+            "dosage": "10 mg",
+            "startDate": "2024-03-29",
+            "duration": "14",
+            "recurring": false,
+            "expirationDate": "2024-04-12"
+          },
+          "presC7": {
+            "name": "Antibiotic",
+            "dosage": "500 mg",
+            "startDate": "2024-09-10",
+            "duration": "7",
+            "recurring": false,
+            "expirationDate": "2024-09-17"
+          },
+          "presC8": {
+            "name": "Cough Syrup",
+            "dosage": "10 ml",
+            "startDate": "2024-02-05",
+            "duration": "5",
+            "recurring": false,
+            "expirationDate": "2024-02-10"
+          },
+          "presC9": {
+            "name": "Eye Drops",
+            "dosage": "1 drop twice daily",
+            "startDate": "2024-09-05",
+            "duration": "10",
+            "recurring": false,
+            "expirationDate": "2024-09-15"
+          },
+          "presC10": {
+            "name": "Topical Cream",
+            "dosage": "Apply twice daily",
+            "startDate": "2024-08-01",
+            "duration": "14",
+            "recurring": false,
+            "expirationDate": "2024-08-15"
           }
         },
         "Financial": {
-          "card3456": {
-            "cardHolderName": "Emily Brown",
-            "cardNumber": "3456345634563456",
-            "expiryDate": "09/28",
-            "cvv": "012"
+          "cardC1": {
+            "cardHolderName": "Emily Davis",
+            "cardNumber": "9876543210987654",
+            "expiryDate": "04/25",
+            "cvv": "123"
+          },
+          "cardC2": {
+            "cardHolderName": "Emily Davis",
+            "cardNumber": "1234567812345678",
+            "expiryDate": "06/26",
+            "cvv": "234"
+          },
+          "cardC3": {
+            "cardHolderName": "Emily Davis",
+            "cardNumber": "4321567890123456",
+            "expiryDate": "12/27",
+            "cvv": "345"
+          },
+          "cardC4": {
+            "cardHolderName": "Emily Davis",
+            "cardNumber": "5678901234567890",
+            "expiryDate": "08/24",
+            "cvv": "456"
+          },
+          "cardC5": {
+            "cardHolderName": "Emily Davis",
+            "cardNumber": "7890123456789012",
+            "expiryDate": "09/23",
+            "cvv": "567"
           }
         }
       }

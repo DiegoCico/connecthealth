@@ -1,0 +1,208 @@
+{
+    "patients": {
+      "uidF12345903412345786": {
+        "Personal": {
+          "Details": {
+            "name": "Robert Taylor",
+            "DOB": "1975-03-20",
+            "email": "roberttaylor@example.com",
+            "phoneNumber": "555-7766",
+            "address": "12 Pine Avenue, Willowtown",
+            "emergencyContact": "Linda Taylor - 555-9988",
+            "patientPhoto": "https://example.com/photos/robert.jpg",
+            "insuranceProvider": "Blue Cross Blue Shield",
+            "insurancePolicy": "BC987654321",
+            "insurancePhoto": "https://example.com/photos/insurance_robert.jpg",
+            "physician": "Dr. Kim"
+          }
+        },
+        "MedicalVisits": {
+          "visitF1": {
+            "reason": "Annual Physical",
+            "results": "All clear",
+            "date": "2024-01-12",
+            "time": "09:30 AM"
+          },
+          "visitF2": {
+            "reason": "Back Pain",
+            "results": "Referred to physical therapy",
+            "date": "2024-02-03",
+            "time": "11:00 AM"
+          },
+          "visitF3": {
+            "reason": "Follow-up for Back Pain",
+            "results": "Progressing well",
+            "date": "2024-02-20",
+            "time": "10:30 AM"
+          },
+          "visitF4": {
+            "reason": "Sore Throat",
+            "results": "Prescribed antibiotics",
+            "date": "2024-03-15",
+            "time": "11:45 AM"
+          },
+          "visitF5": {
+            "reason": "Flu Symptoms",
+            "results": "Prescribed flu treatment",
+            "date": "2024-04-01",
+            "time": "09:00 AM"
+          },
+          "visitF6": {
+            "reason": "Follow-up for Flu",
+            "results": "Recovered",
+            "date": "2024-04-15",
+            "time": "01:00 PM"
+          },
+          "visitF7": {
+            "reason": "Chest Pain",
+            "results": "EKG scheduled",
+            "date": "2024-05-10",
+            "time": "10:00 AM"
+          },
+          "visitF8": {
+            "reason": "EKG Results",
+            "results": "No abnormalities",
+            "date": "2024-05-17",
+            "time": "09:30 AM"
+          },
+          "visitF9": {
+            "reason": "High Blood Pressure",
+            "results": "Medication prescribed",
+            "date": "2024-06-01",
+            "time": "11:00 AM"
+          },
+          "visitF10": {
+            "reason": "Follow-up for High Blood Pressure",
+            "results": "Blood pressure stable",
+            "date": "2024-06-20",
+            "time": "09:00 AM"
+          }
+        },
+        "Prescriptions": {
+          "presF1": {
+            "name": "Lisinopril",
+            "dosage": "10 mg",
+            "startDate": "2024-06-01",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-07-01"
+          },
+          "presF2": {
+            "name": "Ibuprofen",
+            "dosage": "400 mg",
+            "startDate": "2024-03-15",
+            "duration": "5",
+            "recurring": false,
+            "expirationDate": "2024-03-20"
+          },
+          "presF3": {
+            "name": "Antibiotics",
+            "dosage": "500 mg",
+            "startDate": "2024-03-15",
+            "duration": "7",
+            "recurring": false,
+            "expirationDate": "2024-03-22"
+          },
+          "presF4": {
+            "name": "Flu Medication",
+            "dosage": "2 tablets daily",
+            "startDate": "2024-04-01",
+            "duration": "10",
+            "recurring": false,
+            "expirationDate": "2024-04-11"
+          },
+          "presF5": {
+            "name": "Cholesterol Medication",
+            "dosage": "20 mg",
+            "startDate": "2024-05-01",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-06-01"
+          },
+          "presF6": {
+            "name": "Antihistamine",
+            "dosage": "10 mg",
+            "startDate": "2024-03-01",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-04-01"
+          },
+          "presF7": {
+            "name": "Blood Pressure Medication",
+            "dosage": "5 mg",
+            "startDate": "2024-06-01",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": "2024-07-01"
+          },
+          "presF8": {
+            "name": "Eye Drops",
+            "dosage": "2 drops per eye",
+            "startDate": "2024-05-20",
+            "duration": "14",
+            "recurring": false,
+            "expirationDate": "2024-06-03"
+          },
+          "presF9": {
+            "name": "Inhaler",
+            "dosage": "2 puffs as needed",
+            "startDate": "2024-04-10",
+            "duration": "N/A",
+            "recurring": true,
+            "expirationDate": "2025-04-10"
+          }
+        },
+        "Financial": {
+          "cardF1": {
+            "cardHolderName": "Robert Taylor",
+            "cardNumber": "1234567890123456",
+            "expiryDate": "12/25",
+            "cvv": "123"
+          },
+          "cardF2": {
+            "cardHolderName": "Robert Taylor",
+            "cardNumber": "6543210987654321",
+            "expiryDate": "11/24",
+            "cvv": "456"
+          },
+          "cardF3": {
+            "cardHolderName": "Robert Taylor",
+            "cardNumber": "1111222233334444",
+            "expiryDate": "01/26",
+            "cvv": "789"
+          },
+          "cardF4": {
+            "cardHolderName": "Robert Taylor",
+            "cardNumber": "2222333344445555",
+            "expiryDate": "05/27",
+            "cvv": "321"
+          },
+          "cardF5": {
+            "cardHolderName": "Robert Taylor",
+            "cardNumber": "3333444455556666",
+            "expiryDate": "09/28",
+            "cvv": "654"
+          },
+          "cardF6": {
+            "cardHolderName": "Robert Taylor",
+            "cardNumber": "4444555566667777",
+            "expiryDate": "07/26",
+            "cvv": "987"
+          },
+          "cardF7": {
+            "cardHolderName": "Robert Taylor",
+            "cardNumber": "5555666677778888",
+            "expiryDate": "03/24",
+            "cvv": "147"
+          },
+          "cardF8": {
+            "cardHolderName": "Robert Taylor",
+            "cardNumber": "6666777788889999",
+            "expiryDate": "06/25",
+            "cvv": "369"
+          }
+        }
+      }
+    }
+  }
+  

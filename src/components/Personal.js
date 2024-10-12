@@ -1,15 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/Patient2.css';
+import { ref, getStorage } from 'firebase/storage';
+import { app, db, uploadFile } from '../firebase'; 
+import { updateDoc, doc, getDoc } from 'firebase/firestore';
 
-const Personal = ({ patientData, handleChange, handleInsuranceFileChange, handlePatientFileChange, isEditable, validationErrors }) => {
+const Personal = ({ uid, patientData, handleChange, handleInsuranceFileChange, isEditable, validationErrors }) => {
   const [photoPreview, setPhotoPreview] = useState(patientData.photoURL || '');
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState({});
+  const storage = getStorage(app);
+
+  // Fetch patient photo from Firestore if it exists
+  useEffect(() => {
+    const fetchPatientPhoto = async () => {
+      const patientRef = doc(db, 'patients', uid, 'Personal', 'Details');
+      const docSnapshot = await getDoc(patientRef);
+      if (docSnapshot.exists() && docSnapshot.data().patientPhoto) {
+        setPhotoPreview(docSnapshot.data().patientPhoto); // Set the preview from Firestore
+      }
+    };
+    fetchPatientPhoto();
+  }, [uid]);
 
   const handlePatientFileChangeLocal = (event) => {
     const file = event.target.files[0];
     if (file) {
       const previewURL = URL.createObjectURL(file);
       setPhotoPreview(previewURL);
-      handlePatientFileChange(event);  // Call parent handler
+      setSelectedFile(file);
+    }
+  };
+
+  const handleSavePhoto = async () => {
+    if (!selectedFile) {
+      console.error('No file selected for upload');
+      return;
+    }
+
+    const path = `${uid}-photo`; // Define the path using uid
+
+    try {
+      const downloadURL = await uploadFile(selectedFile, path, setUploadProgress, 'photo');
+      console.log('File uploaded successfully, available at:', downloadURL);
+
+      // Update Firestore with the new URL
+      const patientRef = doc(db, 'patients', uid, 'Personal', 'Details');
+      await updateDoc(patientRef, { patientPhoto: downloadURL });
+      console.log('Firestore updated with patient photo URL');
+
+      // Update local state
+      handleChange({ target: { name: 'photoURL', value: downloadURL } });
+    } catch (error) {
+      console.error('Error saving photo:', error);
     }
   };
 
@@ -54,6 +96,12 @@ const Personal = ({ patientData, handleChange, handleInsuranceFileChange, handle
             )}
           </div>
 
+          <button onClick={handleSavePhoto} disabled={!photoPreview || !isEditable}>
+            Save
+          </button>
+        </div>
+
+        <div className="personal-info-container">
           <div className={`form-group ${validationErrors.name ? 'has-error' : ''}`}>
             <label>Name</label>
             <input
@@ -65,9 +113,7 @@ const Personal = ({ patientData, handleChange, handleInsuranceFileChange, handle
               disabled={!isEditable}
             />
           </div>
-        </div>
 
-        <div className="personal-info-container">
           <div className={`form-group ${validationErrors.DOB ? 'has-error' : ''}`}>
             <label>Date of Birth</label>
             <input
