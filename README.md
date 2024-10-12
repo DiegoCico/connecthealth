@@ -61,8 +61,7 @@ Ruff is designed to be a lighthearted, dog-friendly companion in the world of he
 - **AI Integration**: Ruff AI (Custom-developed)
 
 ## Project Infastructor
-
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/diegocicotoste/Documents/Hackathons/connecthealth/Screenshot%202024-10-12%20at%201.37.58%E2%80%AFPM.png?version%3D1728755277050)
+<img width="1012" alt="Screenshot 2024-10-12 at 1 37 58 PM" src="https://github.com/user-attachments/assets/95fa3e45-7921-4ad1-bb03-a66bf1a70b5f">
 
 ## Contributing
 
