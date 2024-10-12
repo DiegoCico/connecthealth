@@ -14,22 +14,24 @@ const Ruff = () => {
 
   const handleSendChat = async () => {
     if (!userInput) return;
-
+  
     const newMessage = { role: 'user', content: userInput };
     setChatHistory([...chatHistory, newMessage]);
-
+  
     // Start loading
     setLoading(true);
-
+  
     try {
       // Simulate an API request
-      const response = await axios.post('http://localhost:5000/api/chat', {
+      const response = await axios.post('http://localhost:5005/api/chat', {
         prompt: userInput,
       });
-
+  
       const replyMessage = { role: 'assistant', content: `🐶 Ruff says: ${response.data.reply}` };
-      setChatHistory([...chatHistory, replyMessage]);
-
+      
+      // Append both the user's message and the reply to the chat history
+      setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage, replyMessage]);
+  
       // Clear the input
       setUserInput('');
     } catch (error) {
@@ -38,9 +40,11 @@ const Ruff = () => {
         role: 'assistant',
         content: '🐶 Ruff is having trouble fetching your advice right now. Please try again later!',
       };
-      setChatHistory([...chatHistory, errorMessage]);
+      
+      // Append the error message to the chat history
+      setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage, errorMessage]);
     }
-
+  
     // End loading
     setLoading(false);
   };

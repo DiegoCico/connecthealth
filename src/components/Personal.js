@@ -1,5 +1,6 @@
 // src/components/Personal.js
 import React from 'react';
+import '../css/Patient2.css'
 
 const Personal = ({ patientData, handleChange, handleInsuranceFileChange, handlePatientFileChange }) => (
   <div className="tab-content fade-in">

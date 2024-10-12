@@ -18,7 +18,12 @@ const app = express();
 const port = 5005;
 
 // Middleware
-app.use(cors());
+// app.use(cors({
+//     origin: 'http://localhost:3000', // Allow requests from React app
+//     methods: ['GET', 'POST', 'OPTIONS'], // Allow these HTTP methods
+//     allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+// }));
+app.use(cors())
 app.use(express.json());
 console.log('CORS and JSON middleware set up');
 
@@ -83,6 +88,15 @@ app.get('/api/get-news', async (req, res) => {
     }
 });
 
+// Handle preflight OPTIONS request for /api/chat
+app.options('/api/chat', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.sendStatus(200);
+});
+
+// API route for chat
 app.post('/api/chat', async (req, res) => {
     const { prompt } = req.body;
     if (!prompt) {
@@ -107,11 +121,12 @@ app.post('/api/chat', async (req, res) => {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${"sk-Z_yDNUjEtQLPCQxXkNRWrdCKmIrbi1kpuuCwLyewJuT3BlbkFJz0OEODAbbXzzrfqgxJdIEactiPDyaDTuZ--V-GnEwA"}`,
+                    Authorization: `Bearer ${"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"}`,
+                    'Content-Type': 'application/json',
                 },
             }
         );
-
+        res.setHeader('Access-Control-Allow-Origin', '*');
         const reply = response.data.choices[0].message.content.trim();
         res.json({ reply });
     } catch (error) {
