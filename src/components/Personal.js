@@ -4,13 +4,26 @@ import { ref, getStorage } from 'firebase/storage';
 import { app, db, uploadFile } from '../firebase'; 
 import { updateDoc, doc, getDoc } from 'firebase/firestore';
 
+/**
+ * Component for managing and displaying a patient's personal information, including photo upload functionality.
+ *
+ * @param {string} uid - The unique ID of the patient.
+ * @param {object} patientData - An object containing the patient's personal data (e.g., name, DOB, email, etc.).
+ * @param {function} handleChange - Callback function to handle changes in the input fields.
+ * @param {function} handleInsuranceFileChange - Callback function to handle the insurance photo upload.
+ * @param {boolean} isEditable - Flag to enable or disable input fields.
+ * @param {object} validationErrors - Object containing validation errors for each field.
+ */
 const Personal = ({ uid, patientData, handleChange, handleInsuranceFileChange, isEditable, validationErrors }) => {
-  const [photoPreview, setPhotoPreview] = useState(patientData.photoURL || '');
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [uploadProgress, setUploadProgress] = useState({});
-  const storage = getStorage(app);
+  const [photoPreview, setPhotoPreview] = useState(patientData.photoURL || ''); // Holds the preview of the patient photo
+  const [selectedFile, setSelectedFile] = useState(null); // Holds the file object for the selected patient photo
+  const [uploadProgress, setUploadProgress] = useState({}); // Stores the progress of the upload
+  const storage = getStorage(app); // Firebase storage reference
 
-  // Fetch patient photo from Firestore if it exists
+  /**
+   * useEffect hook that fetches the patient photo from Firestore when the component is mounted.
+   * If the patient photo exists in Firestore, it sets the preview in the component state.
+   */
   useEffect(() => {
     const fetchPatientPhoto = async () => {
       const patientRef = doc(db, 'patients', uid, 'Personal', 'Details');
@@ -22,15 +35,25 @@ const Personal = ({ uid, patientData, handleChange, handleInsuranceFileChange, i
     fetchPatientPhoto();
   }, [uid]);
 
+  /**
+   * Handles the local preview of the uploaded patient photo.
+   * This function is called when the user selects a file for the patient photo.
+   *
+   * @param {object} event - The file input change event.
+   */
   const handlePatientFileChangeLocal = (event) => {
     const file = event.target.files[0];
     if (file) {
-      const previewURL = URL.createObjectURL(file);
-      setPhotoPreview(previewURL);
-      setSelectedFile(file);
+      const previewURL = URL.createObjectURL(file); // Generate a preview URL for the selected file
+      setPhotoPreview(previewURL); // Set the local preview
+      setSelectedFile(file); // Store the selected file
     }
   };
 
+  /**
+   * Handles the saving of the selected patient photo to Firebase Storage.
+   * Once the photo is uploaded, the Firestore document is updated with the photo URL.
+   */
   const handleSavePhoto = async () => {
     if (!selectedFile) {
       console.error('No file selected for upload');
@@ -40,7 +63,7 @@ const Personal = ({ uid, patientData, handleChange, handleInsuranceFileChange, i
     const path = `${uid}-photo`; // Define the path using uid
 
     try {
-      const downloadURL = await uploadFile(selectedFile, path, setUploadProgress, 'photo');
+      const downloadURL = await uploadFile(selectedFile, path, setUploadProgress, 'photo'); // Upload file to Firebase Storage
       console.log('File uploaded successfully, available at:', downloadURL);
 
       // Update Firestore with the new URL
@@ -48,7 +71,7 @@ const Personal = ({ uid, patientData, handleChange, handleInsuranceFileChange, i
       await updateDoc(patientRef, { patientPhoto: downloadURL });
       console.log('Firestore updated with patient photo URL');
 
-      // Update local state
+      // Update local state with the new photo URL
       handleChange({ target: { name: 'photoURL', value: downloadURL } });
     } catch (error) {
       console.error('Error saving photo:', error);

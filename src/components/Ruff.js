@@ -31,8 +31,6 @@ const Ruff = () => {
           
           // Check if the name matches
           if (personalData.name === name) {
-            console.log("found user data")
-            console.log(personalData)
             foundUserData = personalData;
             break; // Exit the loop once the user is found
           }
@@ -51,6 +49,7 @@ const Ruff = () => {
     }
   };
 
+  // Fetch user's medical data including prescriptions and visit counts
   const fetchUserMedicalData = async (name) => {
     try {
       const patientsCollection = collection(db, 'patients');
@@ -97,17 +96,18 @@ const Ruff = () => {
           return `Prescription ${index + 1}: ${JSON.stringify(prescription)}`;
         }).join('\n');
   
-        return `John Doe Prescriptions:\n${prescriptionsString}, \nTotal Visits: ${visitCount}`;
+        return `${foundUserData.name}'s Prescriptions:\n${prescriptionsString}, \nTotal Visits: ${visitCount}`;
       } else {
         return `User with the name ${name} not found.`;
       }
       
     } catch (error) {
-      console.error('Error fetching user data:', error);
-      return 'Error fetching user data from Firebase.';
+      console.error('Error fetching user medical data:', error);
+      return 'Error fetching user medical data from Firebase.';
     }
   };
 
+  // Fetch the URL of the user's profile page
   const fetchUserUrl = async (name) => {
     try {
       const patientsCollection = collection(db, 'patients');
@@ -142,10 +142,9 @@ const Ruff = () => {
       return 'Error fetching user data from Firebase.';
     }
   };  
-  
 
+  // Handle sending a message and fetching relevant data
   const handleSendChat = async () => {
-    console.log(userInput)
     if (!userInput) return;
 
     const newMessage = { role: 'user', content: userInput };
@@ -164,7 +163,7 @@ const Ruff = () => {
         const userData = await fetchUserMedicalData(name.trim());
         replyMessage = { role: 'assistant', content: `🐶 Ruff found: ${userData}` };
       } else if (userInput.toLowerCase().includes("go to ")) {
-        const name = userInput.split("medical ")[1];
+        const name = userInput.split("go to ")[1];
         const userData = await fetchUserUrl(name.trim());
         
         if (userData.startsWith("/patient/")) {
@@ -173,9 +172,8 @@ const Ruff = () => {
           replyMessage = { role: 'assistant', content: `🐶 Ruff could not find the user: ${userData}` };
         }
       } else if(userInput.toLowerCase() === "help") {
-        replyMessage = { role: 'assistant', content: `🐶 Ruff found: write any mensage and I'll support you. Special commands: find {user name} (will retrive user data), medical {user name} (will retrive some medical records), go to {user name} (will provide the url for their page)` };
-      }else {
-        // For other questions, call your backend
+        replyMessage = { role: 'assistant', content: `🐶 Ruff found: write any message and I'll support you. Special commands: find {user name} (will retrieve user data), medical {user name} (will retrieve some medical records), go to {user name} (will provide the URL for their page)` };
+      } else {
         const response = await axios.post('http://localhost:5005/api/chat', { prompt: userInput });
         replyMessage = { role: 'assistant', content: `🐶 Ruff says: ${response.data.reply}` };
       }
