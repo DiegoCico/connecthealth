@@ -1,45 +1,54 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './ChatButton.css'; // Custom styling
+import '../css/Ruff.css'; // Assuming you have some styles for Ruff
 
-const ChatButton = () => {
+const Ruff = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [userInput, setUserInput] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); // Add loading state
 
   const toggleChat = () => {
     setIsChatOpen(!isChatOpen);
   };
 
-  const handleSend = async () => {
+  const handleSendChat = async () => {
     if (!userInput) return;
 
     const newMessage = { role: 'user', content: userInput };
-    setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage]);
-    setError(null); // Clear previous errors if any
+    setChatHistory([...chatHistory, newMessage]);
+
+    // Start loading
+    setLoading(true);
 
     try {
-      // Call your backend for medical-related responses
-      const response = await axios.post('http://localhost:5005/api/chat', {
+      // Simulate an API request
+      const response = await axios.post('http://localhost:5000/api/chat', {
         prompt: userInput,
       });
 
-      const replyMessage = { role: 'assistant', content: response.data.reply };
-      setChatHistory((prevChatHistory) => [...prevChatHistory, replyMessage]);
+      const replyMessage = { role: 'assistant', content: `🐶 Ruff says: ${response.data.reply}` };
+      setChatHistory([...chatHistory, replyMessage]);
 
-      // Clear the input field
+      // Clear the input
       setUserInput('');
     } catch (error) {
       console.error('Error fetching response:', error);
-      setError('Failed to fetch response. Please try again.');
+      const errorMessage = {
+        role: 'assistant',
+        content: '🐶 Ruff is having trouble fetching your advice right now. Please try again later!',
+      };
+      setChatHistory([...chatHistory, errorMessage]);
     }
+
+    // End loading
+    setLoading(false);
   };
 
   return (
-    <div>
+    <div className="chat-button-container">
       {/* Blue Circle Button */}
-      <button className="blue-circle-button" onClick={toggleChat}>
+      <button className={`blue-circle-button ${isChatOpen ? 'open' : ''}`} onClick={toggleChat}>
         🐾
       </button>
 
@@ -47,35 +56,34 @@ const ChatButton = () => {
       {isChatOpen && (
         <div className="chat-box">
           <h3>🐶 Ruff's Medical Advice</h3>
-          <p>Ask for help with medication or prescription advice.</p>
+          <p>Ask for medication or prescription suggestions.</p>
+
+          {/* Loading indicator */}
+          {loading && <p>Loading...</p>}
 
           {/* Chat History */}
           <div className="chat-history">
             {chatHistory.map((message, index) => (
-              <div
-                key={index}
-                className={message.role === 'user' ? 'user-message' : 'assistant-message'}
-              >
+              <div key={index} className={message.role === 'user' ? 'user-message' : 'assistant-message'}>
                 {message.content}
               </div>
             ))}
           </div>
 
-          {/* Error Message */}
-          {error && <div className="error-message">{error}</div>}
-
           <input
             type="text"
-            placeholder="Describe your symptoms or ask for medication..."
+            placeholder="Type symptoms or medicine..."
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             className="chat-input"
           />
-          <button className="send-btn" onClick={handleSend}>Send</button>
+          <button className="send-btn" onClick={handleSendChat}>
+            Send
+          </button>
         </div>
       )}
     </div>
   );
 };
 
-export default ChatButton;
+export default Ruff;

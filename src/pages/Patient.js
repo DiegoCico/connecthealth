@@ -6,6 +6,8 @@ import { db } from '../firebase';
 import Personal from '../components/Personal';
 import Medical from '../components/Medical';
 import Financial from '../components/Financial';
+import '../css/Patient2.css'
+import SideNav from '../components/SideNav';
 
 const Patient = () => {
   const { uid } = useParams();
@@ -149,34 +151,42 @@ const handleSubmit = async () => {
 
   return (
     <div className="patient-container">
-      {modificationMode ? (
-        <div className="create-account-button">
-          <button disabled={!isFormValid} onClick={handleSubmit}>Create Account</button>
-        </div>
-      ) : (
-        <div className="patient-data">
-          <h2>{patientData.name}</h2>
-          <p><strong>Date of Birth:</strong> {patientData.DOB}</p>
-          <p><strong>Email:</strong> {patientData.email}</p>
-          <p><strong>Phone Number:</strong> {patientData.phoneNumber}</p>
-          {/* Add more details as necessary */}
-        </div>
-      )}
-        
-      <div className="tab-buttons">
-        <button className={activeTab === 'personal' ? 'active' : ''} onClick={() => setActiveTab('personal')}>Personal</button>
-        <button className={activeTab === 'medical' ? 'active' : ''} onClick={() => setActiveTab('medical')}>Medical</button>
-        <button className={activeTab === 'financial' ? 'active' : ''} onClick={() => setActiveTab('financial')}>Financial</button>
-      </div>
-      {renderTabContent()}
 
-      {/* Success Popup */}
-      {showSuccessPopup && (
-        <div className="success-popup">
-          <p>Account created successfully!</p>
-          <button onClick={() => setShowSuccessPopup(false)}>Close</button>
+      <div className='sidebar-container'>
+        <SideNav />
+      </div>
+
+      <div className='patient-data'>
+        {modificationMode ? (
+          <div className="create-account-button">
+            <button disabled={!isFormValid} onClick={handleSubmit}>Create Account</button>
+          </div>
+        ) : (
+          <div className="patient-data">
+            <h2>{patientData.name}</h2>
+            <p><strong>Date of Birth:</strong> {patientData.DOB}</p>
+            <p><strong>Email:</strong> {patientData.email}</p>
+            <p><strong>Phone Number:</strong> {patientData.phoneNumber}</p>
+            {/* Add more details as necessary */}
+          </div>
+        )}
+          
+        <div className="tab-buttons">
+          <button className={activeTab === 'personal' ? 'active' : ''} onClick={() => setActiveTab('personal')}>Personal</button>
+          <button className={activeTab === 'medical' ? 'active' : ''} onClick={() => setActiveTab('medical')}>Medical</button>
+          <button className={activeTab === 'financial' ? 'active' : ''} onClick={() => setActiveTab('financial')}>Financial</button>
         </div>
-      )}
+        {renderTabContent()}
+
+        {/* Success Popup */}
+        {showSuccessPopup && (
+          <div className="success-popup">
+            <p>Account created successfully!</p>
+            <button onClick={() => setShowSuccessPopup(false)}>Close</button>
+          </div>
+        )}
+      </div>
+
     </div>
   );
 };

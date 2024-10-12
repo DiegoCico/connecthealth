@@ -1,19 +1,24 @@
-.blue-circle-button {
+.chat-button-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
+  }
+  
+  .blue-circle-button {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     background-color: #3498db;
-    border: none;
     color: white;
     font-size: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: none;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .blue-circle-button.open {
+    transform: rotate(360deg);
   }
   
   .chat-box {
@@ -26,6 +31,18 @@
     border-radius: 8px;
     padding: 16px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
   
   .chat-history {

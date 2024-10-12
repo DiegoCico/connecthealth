@@ -1,14 +1,11 @@
 /* Side Navigation */
 .side-nav {
-    /* TODO: FIX THIS
-    height: 100vh; /* Full height of the viewport */
-    width: 300px; /* Fixed width for the side nav */
-    position: fixed; /* Fixed to the side of the screen */
-    top: 0;
-    left: 0;
-    background-color: lightblue;
-    padding-top: 20px;
-    z-index: 1000; /* Ensure it stays on top of other content */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center;    /* Align items horizontally in the center */
+  justify-content: flex-start; /* Align items to the top */
+  background-color: lightblue;
+  padding: 0%;
 }
 
 .side-nav ul {
@@ -16,13 +13,9 @@
     padding: 0; /* Remove default padding */
 }
 
-.side-nav ul li {
-    padding: 8px 16px; /* Padding for each list item */
-}
-
 .nav-button {
     width: 100%;
-    padding: 12px;
+    padding: 12px 50px;
     background-color: #007BFF;
     color: white;
     border: none;
@@ -49,7 +42,7 @@
 /* dropdown */
 .dropdown-menu {
   position: relative;
-  top: 100%; /* Position it right below the input */
+  /* top: 100%; Position it right below the input */
   left: 0;
   width: 100%; /* Match the width of the input */
   background-color: white;

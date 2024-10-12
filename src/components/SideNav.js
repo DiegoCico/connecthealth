@@ -68,6 +68,7 @@ const SideNav = () => {
 
   const handleChargeClick = () => {
     setShowPopup(true);
+    setShowDropdown(false)
   }
 
   const closePopup = () => {

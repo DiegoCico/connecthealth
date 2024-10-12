@@ -5,7 +5,6 @@ import '../css/Medical.css'; // Importing the new CSS
 
 const Medical = ({ uid }) => {
   const [showPopup, setShowPopup] = useState(false);
-  const [showChat, setShowChat] = useState(false); // To manage the chat box
   const [visitData, setVisitData] = useState({
     reason: '',
     prescription: '',
@@ -13,8 +12,6 @@ const Medical = ({ uid }) => {
   });
   const [savedVisits, setSavedVisits] = useState([]); // To hold saved visits
   const [prescriptions, setPrescriptions] = useState([]); // To hold prescriptions
-  const [chatInput, setChatInput] = useState(''); // For chat input
-  const [chatHistory, setChatHistory] = useState([]); // Store chat messages
 
   // Define reasons for visit
   const reasonsForVisit = [
@@ -47,11 +44,6 @@ const Medical = ({ uid }) => {
   // Open/close the add visit popup
   const togglePopup = () => {
     setShowPopup(!showPopup);
-  };
-
-  // Toggle the chat box
-  const toggleChat = () => {
-    setShowChat(!showChat);
   };
 
   // Save the visit data to Firestore
@@ -124,18 +116,6 @@ const Medical = ({ uid }) => {
     });
 
     setPrescriptions(prescriptionList); // Update the state with fetched prescriptions
-  };
-
-  // Function to send message to OpenAI for prescription advice
-  const handleSendChat = async () => {
-    if (!chatInput) return;
-
-    setChatHistory([...chatHistory, { role: 'user', content: chatInput }]);
-
-    const replyMessage = `You: ${chatInput}`; 
-
-    setChatHistory([...chatHistory, { role: 'assistant', content: replyMessage }]);
-    setChatInput(''); 
   };
 
   // Fetch visits and prescriptions on component mount
@@ -231,35 +211,6 @@ const Medical = ({ uid }) => {
                 <p>Dosage: {pres.dosage}</p>
               </div>
             ))
-        )}
-      </div>
-
-      {/* Blue Circle Button with Chat Box */}
-      <div className="chat-button-container">
-        <button className={`blue-circle-button ${showChat ? 'open' : ''}`} onClick={toggleChat}>
-          🐾
-        </button>
-
-        {/* Chat box */}
-        {showChat && (
-          <div className="chat-box">
-            <h3>🐶 Ruff's Medical Advice</h3>
-            <div className="chat-history">
-              {chatHistory.map((message, index) => (
-                <div key={index} className={message.role === 'user' ? 'user-message' : 'assistant-message'}>
-                  {message.content}
-                </div>
-              ))}
-            </div>
-            <input
-              type="text"
-              placeholder="Ask about a prescription..."
-              value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
-              className="chat-input"
-            />
-            <button onClick={handleSendChat} className="send-btn">Send</button>
-          </div>
         )}
       </div>
     </div>

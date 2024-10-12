@@ -1,0 +1,16 @@
+.patient-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.sidebar-container {
+    grid-area: 1 / 1 / 6 / 3;
+    background-color: aquamarine;
+}
+.patient-data {
+    grid-area: 1 / 3 / 6 / 11;
+    background-color: rgb(137, 137, 223);
+}

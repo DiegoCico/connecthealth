@@ -41,7 +41,6 @@ const fetchAllArticles = async (q, category, language, country) => {
         console.log(`Fetching page ${currentPage}`);
         // Fetch each page of articles
         const response = await newsapi.v2.topHeadlines({
-            q,
             category,
             language,
             country,
@@ -84,13 +83,14 @@ app.get('/api/get-news', async (req, res) => {
     }
 });
 
-// Route to handle medical advice chat requests
 app.post('/api/chat', async (req, res) => {
     const { prompt } = req.body;
-    console.log('Medical chat request received with prompt:', prompt);
+    if (!prompt) {
+        return res.status(400).json({ error: 'Prompt is required' });
+    }
 
     try {
-        // Make a request to OpenAI API using the `gpt-3.5-turbo` model, specifying professional medical feedback context
+        // Call OpenAI API
         const response = await axios.post(
             'https://api.openai.com/v1/chat/completions',
             {
@@ -98,21 +98,21 @@ app.post('/api/chat', async (req, res) => {
                 messages: [
                     {
                         role: 'system',
-                        content: 'You are assisting doctors and nurses. Provide clear and actionable medical feedback about medications, prescriptions, and other medical decisions based on symptoms or inquiries, without suggesting consultation with other professionals.'
+                        content: 'You are assisting doctors and nurses. Provide clear and actionable medical feedback about medications, prescriptions, and other medical decisions based on symptoms or inquiries.'
                     },
                     { role: 'user', content: prompt }
                 ],
-                max_tokens: 100,
+                max_tokens: 100, // Adjust based on your needs
+                temperature: 0.7, // Adjust based on desired creativity
             },
             {
                 headers: {
-                    'Authorization': `Bearer ${"sk-Z_yDNUjEtQLPCQxXkNRWrdCKmIrbi1kpuuCwLyewJuT3BlbkFJz0OEODAbbXzzrfqgxJdIEactiPDyaDTuZ--V-GnEwA"}`,
+                    Authorization: `Bearer ${"sk-Z_yDNUjEtQLPCQxXkNRWrdCKmIrbi1kpuuCwLyewJuT3BlbkFJz0OEODAbbXzzrfqgxJdIEactiPDyaDTuZ--V-GnEwA"}`,
                 },
             }
         );
 
         const reply = response.data.choices[0].message.content.trim();
-        console.log('OpenAI API response received:', reply);
         res.json({ reply });
     } catch (error) {
         console.error('Error with OpenAI API:', error);
