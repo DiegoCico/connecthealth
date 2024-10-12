@@ -53,7 +53,6 @@
   z-index: 1000; /* Ensure it stays above other elements */
 }
 
-/* Individual dropdown items */
 .dropdown-item {
   padding: 10px;
   cursor: pointer;
@@ -61,7 +60,6 @@
   transition: background-color 0.2s ease;
 }
 
-/* Hover effect for dropdown items */
 .dropdown-item:hover {
   background-color: #007BFF;
   color: white;

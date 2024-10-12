@@ -1,0 +1,103 @@
+.side-nav {
+    background-color: #; /* Dark background */
+    color: white; /* White text color */
+    width: 250px;
+    height: 100vh; /* Full height */
+    padding-top: 20px; /* Spacing at the top */
+  }
+  
+  .side-nav ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0;
+  }
+  
+  .side-nav li {
+    margin: 20px 0; /* Space between each item */
+  }
+  
+  .side-nav .nav-button {
+    background-color: transparent; /* Transparent background */
+    border: none;
+    color: white; /* White text */
+    text-align: left;
+    padding: 10px 20px;
+    font-size: 18px;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .side-nav .nav-button:hover {
+    background-color: #333; /* Slightly lighter hover effect */
+  }
+  
+  .side-nav .nav-button .icon {
+    margin-right: 10px;
+  }
+  
+  .search-patient-container {
+    padding: 20px;
+  }
+  
+  .search-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .dropdown-menu {
+    background-color: #222; /* Dark background */
+    color: white;
+    padding: 10px;
+    position: absolute;
+    z-index: 10;
+    width: 230px;
+    margin-top: 10px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #333;
+  }
+  
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+  
+  .popup {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .close-btn {
+    background-color: #ff5c5c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    float: right;
+  }
+  
+  .close-btn:hover {
+    background-color: #e74c3c;
+  }
+  

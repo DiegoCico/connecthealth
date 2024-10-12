@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { collection, query, where, getDocs, doc, getDoc, addDoc } from "firebase/firestore";
 import { db } from "../firebase"; 
 import { useNavigate } from 'react-router-dom';
-import '../css/SideNav.css'; // Ensure you have this CSS file
+import '../css/SideNav2.css'; // Ensure you have this CSS file
 
 const SideNav = () => {
   const [isSearchMode, setIsSearchMode] = useState(false);
@@ -66,6 +66,14 @@ const SideNav = () => {
     navigate(`/patient/${userId}`);
   };
 
+  const handleButtonClickD = () => {
+    navigate('/Diagnose');
+  };
+
+  const handleHomeClick = () => {
+    navigate('/')
+  }
+
   const handleChargeClick = () => {
     setShowPopup(true);
     setShowDropdown(false)
@@ -79,12 +87,17 @@ const SideNav = () => {
     <div className="side-nav">
       <ul>
         <li>
+          <button onClick={handleHomeClick} className="nav-button">
+            Home
+          </button>
+        </li>
+        <li>
           <button onClick={handleButtonClick} className="nav-button">
             Patient Search
           </button>
         </li>
         <li>
-          <button className="nav-button diagnostic-button">Diagnostic</button>
+          <button onClick={handleButtonClickD} className="nav-button diagnostic-button">Diagnostic</button>
         </li>
         <li>
           <button className="nav-button pay-button" onClick={handleChargeClick}>Charge</button>

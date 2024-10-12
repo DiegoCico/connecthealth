@@ -16,7 +16,9 @@ const Ruff = () => {
     if (!userInput) return;
   
     const newMessage = { role: 'user', content: userInput };
-    setChatHistory([...chatHistory, newMessage]);
+    
+    // Add user's message to chat history before API call
+    setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage]);
   
     // Start loading
     setLoading(true);
@@ -29,8 +31,8 @@ const Ruff = () => {
   
       const replyMessage = { role: 'assistant', content: `🐶 Ruff says: ${response.data.reply}` };
       
-      // Append both the user's message and the reply to the chat history
-      setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage, replyMessage]);
+      // Append only the assistant's reply to the chat history after the API call
+      setChatHistory((prevChatHistory) => [...prevChatHistory, replyMessage]);
   
       // Clear the input
       setUserInput('');
@@ -41,14 +43,14 @@ const Ruff = () => {
         content: '🐶 Ruff is having trouble fetching your advice right now. Please try again later!',
       };
       
-      // Append the error message to the chat history
-      setChatHistory((prevChatHistory) => [...prevChatHistory, newMessage, errorMessage]);
+      // Append only the error message to the chat history
+      setChatHistory((prevChatHistory) => [...prevChatHistory, errorMessage]);
     }
   
     // End loading
     setLoading(false);
   };
-
+  
   return (
     <div className="chat-button-container">
       {/* Blue Circle Button */}

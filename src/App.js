@@ -13,7 +13,7 @@ function App() {
           <Route path='/' element={<Navigate to='/home' replace />} />
           <Route path='/home' element={<Homepage />} />
           <Route path='/patient/:uid' element={<Patient />} />
-          <Route path='/diagnost' element={<Diagnost />} />
+          <Route path='/diagnose' element={<Diagnost />} />
         </Routes>
       </Layout>
     </div>

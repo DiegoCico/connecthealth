@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../css/Diagnose.css';
 
 const Diagnose = () => {
   const [image, setImage] = useState(null);
@@ -7,11 +8,18 @@ const Diagnose = () => {
   const [diagnosis, setDiagnosis] = useState('');
   const [confidence, setConfidence] = useState('');
   const [loading, setLoading] = useState(false);
+  const [imageType, setImageType] = useState('internal'); // New state for selecting image type (internal/external)
 
   // Handle image upload and preview
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
+      // Validate file size (example: max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('File size should not exceed 5MB');
+        return;
+      }
+      
       setImage(file);
       const previewUrl = URL.createObjectURL(file);
       setPreviewUrl(previewUrl);
@@ -29,6 +37,7 @@ const Diagnose = () => {
 
     const formData = new FormData();
     formData.append('file', image);
+    formData.append('imageType', imageType); // Add imageType to the formData
 
     try {
       const response = await axios.post('http://localhost:5005/api/classify', formData, {
@@ -39,8 +48,13 @@ const Diagnose = () => {
 
       const { predictedCondition, predictedConfidence } = response.data;
 
-      setDiagnosis(predictedCondition);
-      setConfidence(predictedConfidence.toFixed(2));  // Show confidence with 2 decimals
+      // Check for the expected data structure
+      if (predictedCondition && predictedConfidence) {
+        setDiagnosis(predictedCondition);
+        setConfidence(predictedConfidence.toFixed(2));  // Show confidence with 2 decimals
+      } else {
+        alert('Unexpected response format');
+      }
 
       setLoading(false);  // End loading state
     } catch (error) {
@@ -50,9 +64,31 @@ const Diagnose = () => {
     }
   };
 
+  // Cleanup preview URL to avoid memory leaks
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
+
   return (
     <div className="diagnose-container">
       <h2>Upload and Diagnose Medical Image</h2>
+
+      {/* Image Type Selection */}
+      <div className="image-type-section">
+        <label htmlFor="imageType">Select Image Type:</label>
+        <select 
+          id="imageType" 
+          value={imageType} 
+          onChange={(e) => setImageType(e.target.value)}
+        >
+          <option value="internal">Internal (X-ray/MRI)</option>
+          <option value="external">External (Burns/Wounds)</option>
+        </select>
+      </div>
 
       {/* Image Upload Section */}
       <div className="upload-section">
@@ -71,6 +107,9 @@ const Diagnose = () => {
       <button onClick={diagnoseImage} disabled={loading}>
         {loading ? 'Diagnosing...' : 'Diagnose'}
       </button>
+
+      {/* Loading Spinner */}
+      {loading && <div className="loading-spinner">Diagnosing...</div>}
 
       {/* Diagnosis Result Section */}
       {diagnosis && (
