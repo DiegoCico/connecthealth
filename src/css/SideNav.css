@@ -1,25 +1,26 @@
 /* Side Navigation */
 .side-nav {
+    /* TODO: FIX THIS
     height: 100vh; /* Full height of the viewport */
-    width: 250px; /* Fixed width for the side nav */
-    position: fixed; /* Fix it to the side of the screen */
+    width: 300px; /* Fixed width for the side nav */
+    position: fixed; /* Fixed to the side of the screen */
     top: 0;
     left: 0;
     background-color: lightblue;
     padding-top: 20px;
     z-index: 1000; /* Ensure it stays on top of other content */
-  }
-  
-  .side-nav ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .side-nav ul li {
-    padding: 8px 16px;
-  }
-  
-  .nav-button {
+}
+
+.side-nav ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+}
+
+.side-nav ul li {
+    padding: 8px 16px; /* Padding for each list item */
+}
+
+.nav-button {
     width: 100%;
     padding: 12px;
     background-color: #007BFF;
@@ -30,15 +31,17 @@
     font-size: 16px;
     margin-bottom: 10px;
     transition: background-color 0.3s ease;
-  }
-  
-  .nav-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Main content */
-  .main-content {
-    margin-left: 260px; /* Offset for the side nav */
+}
+
+.nav-button:hover {
+    background-color: #0056b3; /* Darken the button on hover */
+}
+
+/* Main content */
+.main-content {
+    margin-left: 260px; /* Offset for the side nav (250px + some space) */
     padding: 20px;
-  }
-  
+    min-height: 100vh; /* Ensure full viewport height */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
+    background-color: #f0f0f0; /* Example background color */
+}

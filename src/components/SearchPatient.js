@@ -9,23 +9,24 @@ const SearchPatient = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [patients, setPatients] = useState([]);
   const [noResults, setNoResults] = useState(false);
+  const [loading, setLoading] = useState(false); // New loading state
   const navigate = useNavigate();
 
   const handleSearch = async () => {
     if (searchTerm.trim() === "") {
       setNoResults(false);
+      setPatients([]);
       return;
     }
-
+    setLoading(true); // Start loading
     const q = query(collection(db, "patients"), where("name", "==", searchTerm));
     const querySnapshot = await getDocs(q);
 
+    const results = [];
     if (querySnapshot.empty) {
       setNoResults(true);
       setPatients([]);
     } else {
-      const results = [];
-
       for (const patientDoc of querySnapshot.docs) {
         const userId = patientDoc.id;
         const personalRef = doc(db, `patients/${userId}/Personal/personalData`);
@@ -38,13 +39,14 @@ const SearchPatient = () => {
           });
         }
       }
+    }
 
-      if (results.length > 0) {
-        setPatients(results);
-        setNoResults(false);
-      } else {
-        setNoResults(true);
-      }
+    setLoading(false); // Stop loading
+    if (results.length > 0) {
+      setPatients(results);
+      setNoResults(false);
+    } else {
+      setNoResults(true);
     }
   };
 
@@ -70,17 +72,23 @@ const SearchPatient = () => {
     <div className="search-patient-container">
       {!isSearchMode ? (
         <button onClick={handleButtonClick} className="search-button">
-          Patient
+          Search Patient
         </button>
       ) : (
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search patient by name..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <div className="search-bar">
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search patient by name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button onClick={() => setSearchTerm("")} className="clear-button">
+            Clear
+          </button>
+        </div>
       )}
+      {loading && <div className="loading">Loading...</div>} {/* Loading Indicator */}
       {noResults && (
         <div className="no-results">
           <p>No patient found. <span onClick={handleCreatePatient} className="create-patient-link">Create Patient</span></p>

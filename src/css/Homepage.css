@@ -1,29 +1,25 @@
-.homepage {
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* Full viewport height */
+/* Parent Grid Container for Homepage */
+.homepage-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    grid-template-rows: 100vh; /* Full viewport height */
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
 }
 
-.search-bar {
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-bottom: 1px solid #ccc;
+/* Side Navigation: occupying first column, full height */
+.side-nav {
+    grid-area: 1 / 1 / 2 / 2; /* Spanning across column 1 */
+    background-color: lightblue;
+    padding-top: 20px;
+    z-index: 1000;
+    height: 100vh;
 }
 
-.content {
-    display: flex;
-    flex: 1;
-}
-
-.sidebar {
-    width: 250px;
-    background-color: #f8f8f8;
-    padding: 20px;
-    border-right: 1px solid #ccc;
-}
-
-.news {
-    flex: 1;
+/* News Section: occupying columns 2 to 5, full height */
+.news-content {
+    grid-area: 1 / 2 / 2 / 6; /* Spanning across columns 2 to 5 */
     padding: 20px;
     overflow-y: auto;
+    background-color: lightgreen;
 }
