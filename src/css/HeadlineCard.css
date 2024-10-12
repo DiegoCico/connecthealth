@@ -1,26 +1,25 @@
+/* HeadlineCard.css */
 .headline-card {
-    width: 100%; /* Adjust width as necessary */
-    max-width: 300px; /* Set a max width for the card */
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer; /* Makes the entire card look clickable */
-    transition: box-shadow 0.3s ease;
+    border: 1px solid #ddd; /* Add border to the card */
+    border-radius: 8px;     /* Round corners */
+    margin: 2rem 20rem 2rem 20rem;           /* Space between cards */
+    overflow: hidden;       /* Prevent image overflow */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.2s; /* Smooth scaling effect on hover */
 }
 
 .headline-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a shadow effect on hover */
+    transform: scale(1.02); /* Slightly scale the card on hover */
 }
 
 .headline-image {
-    width: 100%; /* Make the image take up the full width of the card */
-    height: 200px; /* Set a fixed height for the image */
-    object-fit: cover; /* Ensures the image covers the space without distortion */
+    width: 100%;           /* Make the image responsive */
+    height: auto;         /* Maintain aspect ratio */
 }
 
 .headline-title {
-    padding: 10px;
-    font-size: 18px;
-    color: #333;
-    text-align: center;
+    font-size: 1.2em;     /* Title font size */
+    padding: 10px;        /* Padding for title */
+    text-align: center;   /* Center the title */
+    color: #333;          /* Dark color for the title */
 }

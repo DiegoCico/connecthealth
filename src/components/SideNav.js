@@ -68,15 +68,28 @@ const SideNav = () => {
 
   const handlePayButtonClick = () => {
     // Navigate to the payment page or perform any payment logic
-    alert("Payment functionality coming soon!");
+    // alert("Payment functionality coming soon!");
+    setIsSearchMode(true)
   };
+
+  const handleInput = async(e) => {
+    const input = e.target.value
+    setSearchTerm(input)
+
+    const usersCollection = collection(db, "patients");
+    const usersSnapshot = await getDocs(usersCollection);
+
+    let nameFound = false;
+
+
+  }
 
   return (
     <div className="side-nav">
       <ul>
         <li><button onClick={handleButtonClick} className="nav-button">Patient Search</button></li>
         <li><button className="nav-button diagnostic-button">Diagnostic</button></li>
-        <li><button onClick={handlePayButtonClick} className="nav-button pay-button">Pay</button></li>
+        <li><button onClick={handlePayButtonClick} className="nav-button pay-button">Charge</button></li>
       </ul>
 
       {isSearchMode && (
@@ -86,7 +99,8 @@ const SideNav = () => {
             className="search-input"
             placeholder="Search patient by name..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            // onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleInput}
           />
           {noResults && (
             <div className="no-results">
@@ -107,6 +121,7 @@ const SideNav = () => {
               ))}
             </ul>
           )}
+
         </div>
       )}
     </div>

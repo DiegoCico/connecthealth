@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { doc, getDoc, setDoc, collection } from 'firebase/firestore';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { db, uploadFile } from '../firebase';
+import { getStorage } from 'firebase/storage';
+import { db } from '../firebase';
 import Personal from '../components/Personal';
 import Medical from '../components/Medical';
 import Financial from '../components/Financial';
 
 const Patient = () => {
-  const { uid } = useParams(); 
-  const location = useLocation(); 
-  const { modificationMode } = location.state || {}; 
+  const { uid } = useParams();
+  const location = useLocation();
+  const { modificationMode } = location.state || {};
 
   const [patientData, setPatientData] = useState({
     name: '', DOB: '', email: '', phoneNumber: '', address: '',
@@ -19,61 +19,116 @@ const Patient = () => {
     physician: '', insuranceProvider: '', insurancePolicy: '',
     outstandingBills: ''
   });
-  
-  const [isFormValid, setIsFormValid] = useState(false); 
-  const [insuranceFile, setInsuranceFile] = useState(null); 
-  const [patientFile, setPatientFile] = useState(null); 
-  const [uploadProgress, setUploadProgress] = useState({ insurance: 0, patient: 0 }); 
-  const [activeTab, setActiveTab] = useState('personal'); 
+
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [insuranceFile, setInsuranceFile] = useState(null);
+  const [patientFile, setPatientFile] = useState(null);
+  const [activeTab, setActiveTab] = useState('personal');
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false); // Success popup state
   const storage = getStorage();
 
-  // Load patient data on component mount
+  // Load personal, medical, and financial data on component mount if it's an existing user
   useEffect(() => {
     const fetchData = async () => {
-      const docRef = doc(db, 'patients', uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setPatientData(docSnap.data());
+      try {
+        // Fetch personal data from 'Personal' sub-collection
+        const personalRef = doc(db, 'patients', uid, 'Personal', 'Details');
+        const personalSnap = await getDoc(personalRef);
+
+        // Fetch medical data from 'Medical' sub-collection
+        const medicalRef = doc(db, 'patients', uid, 'Medical', 'Details');
+        const medicalSnap = await getDoc(medicalRef);
+
+        // Fetch financial data from 'Financial' sub-collection
+        const financialRef = doc(db, 'patients', uid, 'Financial', 'Details');
+        const financialSnap = await getDoc(financialRef);
+
+        if (personalSnap.exists()) {
+          setPatientData(prevData => ({
+            ...prevData,
+            ...personalSnap.data()
+          }));
+        }
+        if (medicalSnap.exists()) {
+          setPatientData(prevData => ({
+            ...prevData,
+            ...medicalSnap.data()
+          }));
+        }
+        if (financialSnap.exists()) {
+          setPatientData(prevData => ({
+            ...prevData,
+            ...financialSnap.data()
+          }));
+        }
+      } catch (error) {
+        console.error('Error fetching patient data:', error);
       }
     };
-    fetchData();
-  }, [uid]);
+
+    if (!modificationMode) {
+      fetchData();
+    }
+  }, [uid, modificationMode]);
+
+  // Validate that all fields in the Personal tab are filled out
+  useEffect(() => {
+    const isValid = patientData.name && patientData.DOB && patientData.email && patientData.phoneNumber && patientData.address;
+    setIsFormValid(isValid);
+  }, [patientData]);
+
+  // Helper function to remove undefined fields
+  const removeUndefinedFields = (data) => {
+    return Object.fromEntries(
+      Object.entries(data).filter(([_, value]) => value !== undefined)
+    );
+  };
 
   // Save data based on active tab
-  const handleSubmit = async () => {
-    const docRef = doc(db, 'patients', uid);
-
-    if (activeTab === 'medical') {
-      // Save to Medical sub-collection
-      const medicalCollectionRef = collection(docRef, 'Medical');
-      await setDoc(doc(medicalCollectionRef), {
-        medicalHistory: patientData.medicalHistory,
-        currentMedications: patientData.currentMedications,
-        allergies: patientData.allergies,
-        physician: patientData.physician
-      });
-    } else if (activeTab === 'financial') {
-      // Save to Financial sub-collection
-      const financialCollectionRef = collection(docRef, 'Financial');
-      await setDoc(doc(financialCollectionRef), {
-        insuranceProvider: patientData.insuranceProvider,
-        insurancePolicy: patientData.insurancePolicy,
-        outstandingBills: patientData.outstandingBills
-      });
-    } else {
-      // Save personal data directly to patient document
-      await setDoc(docRef, {
-        name: patientData.name,
-        DOB: patientData.DOB,
-        email: patientData.email,
-        phoneNumber: patientData.phoneNumber,
-        address: patientData.address,
-        emergencyContact: patientData.emergencyContact,
-        insurancePhoto: patientData.insurancePhoto,
-        patientPhoto: patientData.patientPhoto
-      });
+  // Save data based on active tab
+const handleSubmit = async () => {
+    const cleanPatientData = removeUndefinedFields(patientData); // Remove undefined fields
+  
+    try {
+      if (activeTab === 'personal') {
+        // Correct: Add a specific document ID, such as 'Details'
+        const personalRef = doc(db, 'patients', uid, 'Personal', 'Details');
+        await setDoc(personalRef, {
+          name: cleanPatientData.name,
+          DOB: cleanPatientData.DOB,
+          email: cleanPatientData.email,
+          phoneNumber: cleanPatientData.phoneNumber,
+          address: cleanPatientData.address,
+          emergencyContact: cleanPatientData.emergencyContact,
+          insurancePhoto: cleanPatientData.insurancePhoto || '',
+          patientPhoto: cleanPatientData.patientPhoto || ''
+        }, { merge: true });
+      } else if (activeTab === 'medical') {
+        // Correct: Add a specific document ID, such as 'Details'
+        const medicalRef = doc(db, 'patients', uid, 'Medical', 'Details');
+        await setDoc(medicalRef, {
+          medicalHistory: cleanPatientData.medicalHistory,
+          currentMedications: cleanPatientData.currentMedications,
+          allergies: cleanPatientData.allergies,
+          physician: cleanPatientData.physician
+        }, { merge: true });
+      } else if (activeTab === 'financial') {
+        // Correct: Add a specific document ID, such as 'Details'
+        const financialRef = doc(db, 'patients', uid, 'Financial', 'Details');
+        await setDoc(financialRef, {
+          insuranceProvider: cleanPatientData.insuranceProvider,
+          insurancePolicy: cleanPatientData.insurancePolicy,
+          outstandingBills: cleanPatientData.outstandingBills
+        }, { merge: true });
+      }
+  
+      // Show success popup after saving data
+      setShowSuccessPopup(true);
+    } catch (error) {
+      console.error('Error saving data:', error);
     }
   };
+  
 
   const handleChange = (e) => setPatientData({ ...patientData, [e.target.name]: e.target.value });
   const handleInsuranceFileChange = (e) => setInsuranceFile(e.target.files[0]);
@@ -86,7 +141,7 @@ const Patient = () => {
       case 'medical':
         return <Medical patientData={patientData} handleChange={handleChange} />;
       case 'financial':
-        return <Financial patientData={patientData} handleChange={handleChange} />;
+        return <Financial patientData={patientData} handleChange={handleChange} uid={uid} />;
       default:
         return null;
     }
@@ -94,13 +149,34 @@ const Patient = () => {
 
   return (
     <div className="patient-container">
+      {modificationMode ? (
+        <div className="create-account-button">
+          <button disabled={!isFormValid} onClick={handleSubmit}>Create Account</button>
+        </div>
+      ) : (
+        <div className="patient-data">
+          <h2>{patientData.name}</h2>
+          <p><strong>Date of Birth:</strong> {patientData.DOB}</p>
+          <p><strong>Email:</strong> {patientData.email}</p>
+          <p><strong>Phone Number:</strong> {patientData.phoneNumber}</p>
+          {/* Add more details as necessary */}
+        </div>
+      )}
+      
       <div className="tab-buttons">
         <button className={activeTab === 'personal' ? 'active' : ''} onClick={() => setActiveTab('personal')}>Personal</button>
         <button className={activeTab === 'medical' ? 'active' : ''} onClick={() => setActiveTab('medical')}>Medical</button>
         <button className={activeTab === 'financial' ? 'active' : ''} onClick={() => setActiveTab('financial')}>Financial</button>
       </div>
       {renderTabContent()}
-      <button onClick={handleSubmit}>Save</button>
+
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div className="success-popup">
+          <p>Account created successfully!</p>
+          <button onClick={() => setShowSuccessPopup(false)}>Close</button>
+        </div>
+      )}
     </div>
   );
 };
