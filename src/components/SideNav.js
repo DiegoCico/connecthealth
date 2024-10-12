@@ -15,6 +15,12 @@ const SideNav = () => {
   const [showDropdown, setShowDropdown] = useState(false); // Show dropdown state
   const [showPopup, setShowPopup] = useState(false);
 
+  // states to send an invoice to a patient
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [amount, setAmount] = useState('');
+  const [description, setDescription] = useState('');
+
   const handleCreatePatient = async () => {
     console.log('add new patient clicked')
     const newPatientRef = await addDoc(collection(db, "patients"), { createdAt: new Date() });
@@ -53,12 +59,14 @@ const SideNav = () => {
 
     if (input.length > 0) {
       const filtered = allNames
-        .filter((patient) => patient.name.toLowerCase().includes(input))
+        .filter((patient) => patient.name && patient.name.toLowerCase().includes(input)) // Check for patient.name
         .map((patient) => patient.name); // Extract only the name for display
 
       setFilterNames(filtered); // Update the filterNames state with the filtered list
       setShowDropdown(filtered.length > 0); // Show dropdown only if there are results
       console.log('Filtered Names:', filtered, showDropdown);
+    } else {
+      setShowDropdown(false); // Hide dropdown if input is empty
     }
   };
 
@@ -76,12 +84,14 @@ const SideNav = () => {
 
   const handleChargeClick = () => {
     setShowPopup(true);
-    setShowDropdown(false)
+    setShowDropdown(false);
   }
 
   const closePopup = () => {
     setShowPopup(false);
   };
+
+
 
   return (
     <div className="side-nav">
@@ -106,6 +116,7 @@ const SideNav = () => {
 
       {isSearchMode && (
         <div className="search-patient-container">
+          <button onClick={handleCreatePatient}>Add new patient</button>
           <input
             type="text"
             className="search-input"
@@ -113,15 +124,13 @@ const SideNav = () => {
             value={searchTerm}
             onChange={handleInput}
           />
-          <button onClick={() => handleCreatePatient()}>Add new patient</button>
-
         </div>
       )}
 
-      {showDropdown && (
+      {showDropdown && filterNames.length > 0 && (
         <div className="dropdown-menu">
           {filterNames.map((name, index) => (
-            <div className="dropdown-item" key={index}>
+            <div className="dropdown-item" key={index} onClick={() => handlePatientClick(name)}>
               {name}
             </div>
           ))}
@@ -133,7 +142,25 @@ const SideNav = () => {
           <div className="popup">
             <button className="close-btn" onClick={closePopup}>X</button>
             <h2>Charge Details</h2>
-            <p>Charge information will go here.</p>
+            <form>
+              <div className="form-group">
+                <label htmlFor="email">Email of the Recipient</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="name">Name of the Recipient</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="amount">Amount to be Charged</label>
+                <input type="number" id="amount" name="amount" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="description">Description of the Invoice</label>
+                <textarea id="description" name="description" required></textarea>
+              </div>
+              <button type="submit" className="submit-btn">Submit</button>
+            </form>
           </div>
         </div>
       )}
@@ -142,3 +169,5 @@ const SideNav = () => {
 };
 
 export default SideNav;
+
+

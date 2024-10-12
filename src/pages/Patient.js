@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { db, uploadFile } from '../firebase';
+import { db, uploadFile, deleteFile } from '../firebase';  // Import deleteFile
 import Personal from '../components/Personal';
 import Medical from '../components/Medical';
 import Financial from '../components/Financial';
@@ -13,6 +13,7 @@ const Patient = () => {
   const location = useLocation();
   const { modificationMode } = location.state || {};
 
+  const [activeTab, setActiveTab] = useState('personal');  // State for active tab
   const [patientData, setPatientData] = useState({
     name: '', DOB: '', email: '', phoneNumber: '', address: '',
     emergencyContact: '', insurancePhoto: '', patientPhoto: '',
@@ -21,13 +22,12 @@ const Patient = () => {
     outstandingBills: ''
   });
 
-  const [isFormValid, setIsFormValid] = useState(false);
   const [insuranceFile, setInsuranceFile] = useState(null);
   const [patientFile, setPatientFile] = useState(null);
-  const [activeTab, setActiveTab] = useState('personal');
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [uploadProgress, setUploadProgress] = useState({});
-  const [isEditable, setIsEditable] = useState(true); // New state to track edit mode
+  const [isEditable, setIsEditable] = useState(true);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({}); // State for validation errors
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,28 +35,10 @@ const Patient = () => {
         const personalRef = doc(db, 'patients', uid, 'Personal', 'Details');
         const personalSnap = await getDoc(personalRef);
 
-        const medicalRef = doc(db, 'patients', uid, 'Medical', 'Details');
-        const medicalSnap = await getDoc(medicalRef);
-
-        const financialRef = doc(db, 'patients', uid, 'Financial', 'Details');
-        const financialSnap = await getDoc(financialRef);
-
         if (personalSnap.exists()) {
           setPatientData(prevData => ({
             ...prevData,
             ...personalSnap.data()
-          }));
-        }
-        if (medicalSnap.exists()) {
-          setPatientData(prevData => ({
-            ...prevData,
-            ...medicalSnap.data()
-          }));
-        }
-        if (financialSnap.exists()) {
-          setPatientData(prevData => ({
-            ...prevData,
-            ...financialSnap.data()
           }));
         }
       } catch (error) {
@@ -69,79 +51,96 @@ const Patient = () => {
     }
   }, [uid, modificationMode]);
 
-  useEffect(() => {
-    const isValid = patientData.name && patientData.DOB && patientData.email && patientData.phoneNumber && patientData.address;
-    setIsFormValid(isValid);
-  }, [patientData]);
+  const handlePatientFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      if (patientData.patientPhoto) {
+        await deleteFile(`${uid}-photo`);
+      }
+      const patientPhotoUrl = await uploadFile(file, `${uid}-photo`, setUploadProgress, 'patient');
+      setPatientData(prevData => ({
+        ...prevData,
+        patientPhoto: patientPhotoUrl
+      }));
+    }
+  };
 
   const handleSubmit = async () => {
-    const cleanPatientData = Object.fromEntries(Object.entries(patientData).filter(([_, value]) => value !== undefined));
+    const errors = {};
+
+    // Validation for required fields
+    if (!patientData.name) errors.name = true;
+    if (!patientData.DOB) errors.DOB = true;
+    if (!patientData.email) errors.email = true;
+    if (!patientData.phoneNumber) errors.phoneNumber = true;
+    if (!patientData.address) errors.address = true;
+    if (!patientData.emergencyContact) errors.emergencyContact = true;
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
 
     try {
-      let insurancePhotoUrl = cleanPatientData.insurancePhoto;
-      let patientPhotoUrl = cleanPatientData.patientPhoto;
-
-      if (insuranceFile) {
-        insurancePhotoUrl = await uploadFile(insuranceFile, `${uid}-insurance`, setUploadProgress, 'insurance');
-      }
+      let patientPhotoUrl = patientData.patientPhoto;
 
       if (patientFile) {
         patientPhotoUrl = await uploadFile(patientFile, `${uid}-photo`, setUploadProgress, 'patient');
-        setPatientData(prevData => ({
-          ...prevData,
-          patientPhoto: patientPhotoUrl
-        }));
       }
 
-      if (activeTab === 'personal') {
-        const personalRef = doc(db, 'patients', uid, 'Personal', 'Details');
-        await setDoc(personalRef, {
-          name: cleanPatientData.name,
-          DOB: cleanPatientData.DOB,
-          email: cleanPatientData.email,
-          phoneNumber: cleanPatientData.phoneNumber,
-          address: cleanPatientData.address,
-          emergencyContact: cleanPatientData.emergencyContact,
-          insurancePhoto: insurancePhotoUrl || '',
-          patientPhoto: patientPhotoUrl || ''
-        }, { merge: true });
-      }
+      const personalRef = doc(db, 'patients', uid, 'Personal', 'Details');
+      await setDoc(personalRef, {
+        ...patientData,
+        patientPhoto: patientPhotoUrl || ''
+      }, { merge: true });
 
       setShowSuccessPopup(true);
-      setIsEditable(false); // Disable edit mode after creation
+      setIsEditable(false);
+      setValidationErrors({});  // Clear errors on successful save
     } catch (error) {
       console.error('Error saving data:', error);
     }
   };
 
-  const handleChange = (e) => setPatientData({ ...patientData, [e.target.name]: e.target.value });
-  const handleInsuranceFileChange = (e) => setInsuranceFile(e.target.files[0]);
-  const handlePatientFileChange = (e) => setPatientFile(e.target.files[0]);
-
-  const toggleEditMode = () => {
-    setIsEditable(prevState => !prevState);
+  const handleChange = (e) => {
+    setPatientData({ ...patientData, [e.target.name]: e.target.value });
+    setValidationErrors((prevErrors) => ({ ...prevErrors, [e.target.name]: false })); // Clear field error on change
   };
+
+  const handleInsuranceFileChange = (e) => setInsuranceFile(e.target.files[0]);
+
+  const toggleEditMode = () => setIsEditable(prevState => !prevState);
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'personal':
+      case 'medical':
+        return (
+          <Medical
+            uid={uid}
+          />
+        );
+      case 'financial':
+        return (
+          <Financial
+            uid={uid}
+          />
+        );
+      default:
         return (
           <Personal
             patientData={patientData}
             handleChange={handleChange}
             handleInsuranceFileChange={handleInsuranceFileChange}
             handlePatientFileChange={handlePatientFileChange}
-            isEditable={isEditable} // Pass edit mode to Personal component
+            isEditable={isEditable}
+            validationErrors={validationErrors}
           />
         );
-      case 'medical':
-        return <Medical patientData={patientData} handleChange={handleChange} isEditable={isEditable} />;
-      case 'financial':
-        return <Financial patientData={patientData} handleChange={handleChange} uid={uid} isEditable={isEditable} />;
-      default:
-        return null;
     }
   };
+
+  // Check if personal information has been filled
+  const isPersonalInfoFilled = patientData.name && patientData.DOB && patientData.email && patientData.phoneNumber && patientData.address && patientData.emergencyContact;
 
   return (
     <div className="patient-container">
@@ -152,35 +151,33 @@ const Patient = () => {
       <div className='patient-data'>
         <div className="tab-buttons">
           <button className={activeTab === 'personal' ? 'active' : ''} onClick={() => setActiveTab('personal')}>Personal</button>
-          <button className={activeTab === 'medical' ? 'active' : ''} onClick={() => setActiveTab('medical')}>Medical</button>
-          <button className={activeTab === 'financial' ? 'active' : ''} onClick={() => setActiveTab('financial')}>Financial</button>
+          <button 
+            className={activeTab === 'medical' ? 'active' : ''} 
+            onClick={() => isPersonalInfoFilled && setActiveTab('medical')} // Only switch to 'medical' if personal info is filled
+            disabled={!isPersonalInfoFilled}  // Disable if personal info isn't filled
+          >
+            Medical
+          </button>
+          <button 
+            className={activeTab === 'financial' ? 'active' : ''} 
+            onClick={() => isPersonalInfoFilled && setActiveTab('financial')}  // Only switch to 'financial' if personal info is filled
+            disabled={!isPersonalInfoFilled}  // Disable if personal info isn't filled
+          >
+            Financial
+          </button>
         </div>
 
         {renderTabContent()}
 
-        {modificationMode && activeTab === 'personal' && (
+        {modificationMode && (
           <div className="create-account-button">
             {!isEditable ? (
               <button onClick={toggleEditMode}>Edit</button>
             ) : (
-              <button disabled={!isFormValid} onClick={handleSubmit}>Save</button>
+              <button disabled={!patientData.name || !patientData.DOB} onClick={handleSubmit}>Save</button>
             )}
           </div>
         )}
-        {/* : (
-          <div className="patient-data">
-            <h2>{patientData.name}</h2>
-            <p><strong>Date of Birth:</strong> {patientData.DOB}</p>
-            <p><strong>Email:</strong> {patientData.email}</p>
-            <p><strong>Phone Number:</strong> {patientData.phoneNumber}</p>
-
-            {patientData.patientPhoto ? (
-              <img src={patientData.patientPhoto} alt="Patient" className="patient-photo" />
-            ) : (
-              <p>No photo available</p>
-            )}
-          </div>
-        )} */}
 
         {showSuccessPopup && (
           <div className="success-popup">

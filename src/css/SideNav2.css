@@ -1,5 +1,5 @@
 .side-nav {
-    background-color: #; /* Dark background */
+    background-color: #1f526b; /* Dark background */
     color: white; /* White text color */
     width: 250px;
     height: 100vh; /* Full height */
@@ -18,7 +18,7 @@
   .side-nav .nav-button {
     background-color: transparent; /* Transparent background */
     border: none;
-    color: white; /* White text */
+    color: white; /* Default text color */
     text-align: left;
     padding: 10px 20px;
     font-size: 18px;
@@ -29,11 +29,7 @@
   }
   
   .side-nav .nav-button:hover {
-    background-color: #333; /* Slightly lighter hover effect */
-  }
-  
-  .side-nav .nav-button .icon {
-    margin-right: 10px;
+    color: #fd6f2f; /* Change text color on hover */
   }
   
   .search-patient-container {
@@ -44,6 +40,27 @@
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 10px;
+    border-radius: 8px; /* Make the search input rounded */
+    border: 1px solid #ccc; /* Add a subtle border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .search-patient-container button {
+    margin: 20px;
+    background-color: orange; /* Orange background */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 12px 24px; /* Button padding */
+    font-size: 18px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .search-patient-container button:hover {
+    background-color: darkorange; /* Darker orange on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
   }
   
   .dropdown-menu {
@@ -82,10 +99,13 @@
   
   .popup {
     background-color: white;
+    color: black;
     padding: 20px;
     border-radius: 8px;
     max-width: 400px;
     width: 100%;
+    text-align: center;
+    position: relative;
   }
   
   .close-btn {
@@ -100,4 +120,40 @@
   .close-btn:hover {
     background-color: #e74c3c;
   }
+
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+  }
+  
+  .submit-btn {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #4cae4c;
+  }
+  
   
