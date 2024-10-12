@@ -1,0 +1,44 @@
+/* Side Navigation */
+.side-nav {
+    height: 100vh; /* Full height of the viewport */
+    width: 250px; /* Fixed width for the side nav */
+    position: fixed; /* Fix it to the side of the screen */
+    top: 0;
+    left: 0;
+    background-color: lightblue;
+    padding-top: 20px;
+    z-index: 1000; /* Ensure it stays on top of other content */
+  }
+  
+  .side-nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .side-nav ul li {
+    padding: 8px 16px;
+  }
+  
+  .nav-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Main content */
+  .main-content {
+    margin-left: 260px; /* Offset for the side nav */
+    padding: 20px;
+  }
+  
