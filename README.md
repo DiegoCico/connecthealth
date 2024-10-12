@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# ConnectHealth
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**ConnectHealth** is a secure and efficient platform designed to help hospitals manage patient data while ensuring data security and fostering collaboration between healthcare providers. The platform is powered by **Ruff**, an AI assistant that helps doctors make informed decisions on medications, treatments, and patient care protocols.
 
-## Available Scripts
+## Why This Project Was Created
 
-In the project directory, you can run:
+The healthcare industry often struggles with challenges related to data security, management, and interoperability between hospitals. **ConnectHealth** was created to address these challenges by:
 
-### `npm start`
+1. **Ensuring Data Security**: With sensitive information such as personal, medical, and financial data, the platform ensures all data is securely stored and encrypted to protect patient privacy.
+2. **Improving Hospital Collaboration**: Many hospitals face difficulties sharing patient information across different facilities. ConnectHealth connects hospitals on a unified platform, allowing seamless and secure sharing of patient data.
+3. **Introducing AI-Assisted Decision Making**: The integration of **Ruff**, our AI assistant, helps healthcare professionals by offering real-time suggestions on medications and treatments, speeding up decision-making and improving patient outcomes.
+4. **Simplifying Data Management**: ConnectHealth offers an easy-to-use interface that allows healthcare providers to manage medical records, prescriptions, and financial information efficiently, reducing administrative overhead and ensuring compliance with healthcare regulations.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Ruff: Your Friendly Medical Assistant 🐶
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Ruff is a helpful and interactive feature designed to assist healthcare professionals with quick access to patient data and medical advice. Built using React, Firebase, and Axios, Ruff operates through a chat interface where users can type commands to retrieve specific information or get advice.
 
-### `npm test`
+### Key Features:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Find Patient Information**: With the command `find {user name}`, Ruff will search the database for a patient’s personal details such as name, date of birth, allergies, address, and phone number.
+  
+- **Retrieve Medical Records**: Use the command `medical {user name}` to pull up patient records, including prescription history and the total number of medical visits.
 
-### `npm run build`
+- **Access Patient Profile URL**: Ruff can provide a direct link to the patient's profile by using the command `go to {user name}`. This makes navigating patient records easier.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **General Commands**: Typing `help` will display a list of available commands and how Ruff can assist you with medical advice or patient data retrieval.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Example Commands:
+- `find John Doe`: Fetches personal data for John Doe.
+- `medical Jane Doe`: Retrieves medical records, including prescriptions and visits.
+- `go to John Doe`: Returns a URL for John Doe’s profile page.
+- `help`: Shows all available commands and assistance Ruff can provide.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Ruff is designed to be a lighthearted, dog-friendly companion in the world of healthcare, giving quick and accurate information when needed!
 
-### `npm run eject`
+# Key Features 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. **Personalized Patient Management**
+   - **Comprehensive Patient Profiles**: Manage patient personal data including name, date of birth, contact information, and emergency contacts.
+   - **Photo and Document Uploads**: Upload and securely store patient photos and insurance documents.
+   - **Editable Information**: Healthcare staff can update patient data easily, with validation to ensure accuracy.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 2. **Medical Records and Visits**
+   - **Medical Visit Tracking**: Track patient visits with information like the reason for the visit, prescriptions given, and visit outcomes.
+   - **Prescription Management**: Doctors can prescribe medications, track recurring prescriptions, and update or edit dosage and duration.
+   - **AI Suggestions**: Ruff, the AI assistant, provides suggestions for medications based on patient history and symptoms.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 3. **Secure Financial Data**
+   - **Credit Card Management**: Store and manage patient credit card information securely, including the ability to add, edit, or remove cards.
+   - **Billing Integration**: Track outstanding bills and connect insurance providers for smooth payment processing.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 4. **Built-in Security**
+   - **Data Encryption**: All sensitive data is encrypted to ensure compliance with healthcare data regulations.
+   - **User Authentication**: Role-based access controls ensure that only authorized personnel can access sensitive patient data.
 
-## Learn More
+## Technology Stack
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Frontend**: React.js
+- **Backend**: Node.js
+- **Database**: Firebase Firestore
+- **AI Integration**: Ruff AI (Custom-developed)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Infastructor
 
-### Code Splitting
+![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/diegocicotoste/Documents/Hackathons/connecthealth/Screenshot%202024-10-12%20at%201.37.58%E2%80%AFPM.png?version%3D1728755277050)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Contributing
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+We welcome contributions! Please submit pull requests or report issues to help improve **ConnectHealth**.

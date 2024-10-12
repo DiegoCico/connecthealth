@@ -1,0 +1,64 @@
+{
+    "patients": {
+      "uid67890": {
+        "Personal": {
+          "Details": {
+            "name": "Mary Jane",
+            "DOB": "1985-07-12",
+            "email": "maryjane@example.com",
+            "phoneNumber": "555-9876",
+            "address": "456 Oak St, Metropolis",
+            "emergencyContact": "John Doe - 555-4321",
+            "patientPhoto": "https://example.com/photos/maryjane.jpg",
+            "insuranceProvider": "MediCare",
+            "insurancePolicy": "MC98765432",
+            "insurancePhoto": "https://example.com/photos/insurance_maryjane.jpg",
+            "physician": "Dr. Green"
+          }
+        },
+        "MedicalVisits": {
+          "visit1": {
+            "reason": "Blood Pressure Check",
+            "prescription": "Lisinopril",
+            "results": "Stable pressure",
+            "date": "2024-09-20",
+            "time": "10:00 AM"
+          },
+          "visit2": {
+            "reason": "Vaccination",
+            "prescription": "Flu Vaccine",
+            "results": "Administered successfully",
+            "date": "2024-10-01",
+            "time": "11:00 AM"
+          }
+        },
+        "Prescriptions": {
+          "prescription1": {
+            "name": "Lisinopril",
+            "dosage": "10 mg once a day",
+            "startDate": "2024-09-20",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": null
+          },
+          "prescription2": {
+            "name": "Flu Vaccine",
+            "dosage": "One dose",
+            "startDate": "2024-10-01",
+            "duration": "1",
+            "recurring": false,
+            "expirationDate": "2024-10-02"
+          }
+        },
+        "Financial": {
+          "card5678": {
+            "cardHolderName": "Mary Jane",
+            "cardNumber": "5678567856785678",
+            "expiryDate": "01/26",
+            "cvv": "456"
+          }
+        }
+      }
+    }
+  }
+  

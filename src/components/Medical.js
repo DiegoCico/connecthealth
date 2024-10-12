@@ -5,10 +5,19 @@ import '../css/Medical.css'; // Importing the new CSS
 
 const Medical = ({ uid }) => {
   const [showPopup, setShowPopup] = useState(false);
+  const [showPrescriptionPopup, setShowPrescriptionPopup] = useState(false); // New prescription popup state
+  const [editPrescriptionId, setEditPrescriptionId] = useState(null); // For editing a prescription
   const [visitData, setVisitData] = useState({
     reason: '',
     prescription: '',
     results: ''
+  });
+  const [prescriptionData, setPrescriptionData] = useState({
+    name: '',
+    startDate: new Date().toLocaleDateString(),
+    dosage: '',
+    duration: '',
+    recurring: false
   });
   const [savedVisits, setSavedVisits] = useState([]); // To hold saved visits
   const [prescriptions, setPrescriptions] = useState([]); // To hold prescriptions
@@ -24,13 +33,6 @@ const Medical = ({ uid }) => {
     'Other'
   ];
 
-  // Function to check if a prescription is expired
-  const isPrescriptionExpired = (expirationDate) => {
-    const currentDate = new Date();
-    const expDate = new Date(expirationDate);
-    return currentDate > expDate;
-  };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setVisitData((prevData) => ({
@@ -39,8 +41,47 @@ const Medical = ({ uid }) => {
     }));
   };
 
+  const handlePrescriptionChange = (e) => {
+    const { name, value } = e.target;
+    setPrescriptionData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  const handleRecurringChange = (e) => {
+    setPrescriptionData((prevData) => ({
+      ...prevData,
+      recurring: e.target.checked,
+      duration: e.target.checked ? '' : prevData.duration // Disable duration if recurring is checked
+    }));
+  };
+
   const togglePopup = () => {
     setShowPopup(!showPopup);
+  };
+
+  const togglePrescriptionPopup = (prescription = null) => {
+    if (prescription) {
+      setPrescriptionData({
+        name: prescription.name,
+        startDate: prescription.startDate,
+        dosage: prescription.dosage,
+        duration: prescription.duration || '',
+        recurring: prescription.recurring || false
+      });
+      setEditPrescriptionId(prescription.id); // Set the ID for editing
+    } else {
+      setPrescriptionData({
+        name: '',
+        startDate: new Date().toLocaleDateString(),
+        dosage: '',
+        duration: '',
+        recurring: false
+      });
+      setEditPrescriptionId(null); // New prescription
+    }
+    setShowPrescriptionPopup(!showPrescriptionPopup);
   };
 
   const saveVisit = async () => {
@@ -62,6 +103,33 @@ const Medical = ({ uid }) => {
     } catch (error) {
       console.error('Error saving visit:', error);
     }
+  };
+
+  const savePrescription = async () => {
+    try {
+      const prescriptionRef = editPrescriptionId
+        ? doc(db, 'patients', uid, 'Prescriptions', editPrescriptionId) // Update existing prescription
+        : doc(collection(db, 'patients', uid, 'Prescriptions')); // Add new prescription
+
+      await setDoc(prescriptionRef, {
+        ...prescriptionData,
+        startDate: new Date().toLocaleDateString(), // Automatically input current date
+        expirationDate: prescriptionData.recurring ? null : calculateExpirationDate(prescriptionData.startDate, prescriptionData.duration)
+      });
+
+      fetchPrescriptions();
+      setPrescriptionData({ name: '', startDate: new Date().toLocaleDateString(), dosage: '', duration: '', recurring: false });
+      setShowPrescriptionPopup(false);
+    } catch (error) {
+      console.error('Error saving prescription:', error);
+    }
+  };
+
+  const calculateExpirationDate = (startDate, duration) => {
+    const start = new Date(startDate);
+    const durationInDays = parseInt(duration, 10);
+    start.setDate(start.getDate() + durationInDays);
+    return start.toLocaleDateString();
   };
 
   const fetchSavedVisits = async () => {
@@ -103,7 +171,7 @@ const Medical = ({ uid }) => {
 
   return (
     <div className="medical-container" style={{ display: 'flex', width: '100%' }}>
-      {/* Left side: 75% width */}
+      {/* Left side for Medical Visits (75% width) */}
       <div style={{ width: '75%', padding: '20px', borderRight: '1px solid #ccc' }}>
         <h2>Medical Visits</h2>
         <button onClick={togglePopup} style={{ padding: '10px 20px', marginBottom: '20px' }}>Add Doctor Visit</button>
@@ -150,21 +218,71 @@ const Medical = ({ uid }) => {
         )}
       </div>
 
+      {/* Right side for Prescriptions (25% width) */}
       <div style={{ width: '25%', padding: '20px' }}>
         <h2>Prescriptions</h2>
-        <h3>Available</h3>
+        <button onClick={() => togglePrescriptionPopup()} style={{ padding: '10px 20px', marginBottom: '20px' }}>
+          Add Prescription
+        </button>
+
+        {showPrescriptionPopup && (
+          <div className="popup-overlay">
+            <div className="popup-content">
+              <h3>{editPrescriptionId ? 'Edit Prescription' : 'Add Prescription'}</h3>
+              <label>
+                Prescription Name:
+                <input type="text" name="name" value={prescriptionData.name} onChange={handlePrescriptionChange} />
+              </label>
+              <br />
+              <label>
+                Start Date: {prescriptionData.startDate}
+              </label>
+              <br />
+              <label>
+                Dosage:
+                <input type="text" name="dosage" value={prescriptionData.dosage} onChange={handlePrescriptionChange} />
+              </label>
+              <br />
+              <label>
+                Duration (days):
+                <input
+                  type="text"
+                  name="duration"
+                  value={prescriptionData.duration}
+                  onChange={handlePrescriptionChange}
+                  disabled={prescriptionData.recurring}
+                />
+              </label>
+              <br />
+              <label>
+                Recurring:
+                <input
+                  type="checkbox"
+                  name="recurring"
+                  checked={prescriptionData.recurring}
+                  onChange={handleRecurringChange}
+                />
+              </label>
+              <br />
+              <button onClick={savePrescription}>{editPrescriptionId ? 'Update Prescription' : 'Save Prescription'}</button>
+              <button onClick={() => togglePrescriptionPopup(null)}>Cancel</button>
+            </div>
+          </div>
+        )}
+
+        <h3>Available Prescriptions</h3>
         {prescriptions.filter(pres => !isPrescriptionExpired(pres.expirationDate)).length === 0 ? (
           <p>No available prescriptions.</p>
         ) : (
           prescriptions.filter(pres => !isPrescriptionExpired(pres.expirationDate)).map((pres) => (
-            <div key={pres.id}>
+            <div key={pres.id} onClick={() => togglePrescriptionPopup(pres)} style={{ cursor: 'pointer' }}>
               <p><strong>{pres.name}</strong></p>
               <p>Dosage: {pres.dosage}</p>
             </div>
           ))
         )}
 
-        <h3>Expired</h3>
+        <h3>Expired Prescriptions</h3>
         {prescriptions.filter(pres => isPrescriptionExpired(pres.expirationDate)).length === 0 ? (
           <p>No expired prescriptions.</p>
         ) : (
@@ -178,6 +296,13 @@ const Medical = ({ uid }) => {
       </div>
     </div>
   );
+};
+
+const isPrescriptionExpired = (expirationDate) => {
+  if (!expirationDate) return false; // Recurring prescriptions are always active
+  const currentDate = new Date();
+  const expDate = new Date(expirationDate);
+  return currentDate > expDate;
 };
 
 const VisitDetails = ({ visit }) => {

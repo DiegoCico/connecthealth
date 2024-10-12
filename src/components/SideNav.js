@@ -2,71 +2,86 @@ import React, { useState, useEffect } from "react";
 import { collection, query, where, getDocs, doc, getDoc, addDoc } from "firebase/firestore";
 import { db } from "../firebase"; 
 import { useNavigate } from 'react-router-dom';
+import ImportPatientPopup from "./ImportPatientPopUp";
 import '../css/SideNav2.css'; // Ensure you have this CSS file
 
 const SideNav = () => {
   const [isSearchMode, setIsSearchMode] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [patients, setPatients] = useState([]);
-  const [noResults, setNoResults] = useState(false);
-  const navigate = useNavigate();
-  const [allNames, setAllNames] = useState([]); // Array to hold all patient names
-  const [filterNames, setFilterNames] = useState([]); // Filtered names for dropdown
-  const [showDropdown, setShowDropdown] = useState(false); // Show dropdown state
   const [showPopup, setShowPopup] = useState(false);
+  const [allPatients, setAllPatients] = useState([]);
+  const [filteredPatients, setFilteredPatients] = useState([]);
+  const [filteredChargePatients, setFilteredChargePatients] = useState([]);
+  
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchChargeTerm, setSearchChargeTerm] = useState("");
+  
+  const [recipientEmail, setRecipientEmail] = useState('');
+  const [showEmailTextBox, setShowEmailTextBox] = useState(false);
+  const [recipientName, setRecipientName] = useState('');
+  const [invoiceAmount, setInvoiceAmount] = useState('');
+  const [invoiceDescription, setInvoiceDescription] = useState('');
 
-  // states to send an invoice to a patient
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [amount, setAmount] = useState('');
-  const [description, setDescription] = useState('');
+  const [showImportPatientPopUp, setShowImportPatientPopUp] = useState(false)
+  const toggleImportPatientPopUp = () => {
+    setShowImportPatientPopUp(!showImportPatientPopUp)
+  }
+  
+  const navigate = useNavigate();
 
   const handleCreatePatient = async () => {
-    console.log('add new patient clicked')
     const newPatientRef = await addDoc(collection(db, "patients"), { createdAt: new Date() });
     const newUid = newPatientRef.id;
     navigate(`/patient/${newUid}`, { state: { modificationMode: true } });
   };
 
-  const handleButtonClick = async () => {
-    setIsSearchMode(true);
-
+  const handleButtonClick = async (charge) => {
+    if (!charge) {
+      setIsSearchMode(true);
+    }
     try {
-      const patientsQuery = collection(db, "patients"); // Reference to the 'patients' collection
-      const patientsSnapshot = await getDocs(patientsQuery); // Get all patients
-
-      const names = []; // Array to store patient names
+      const patientsQuery = collection(db, "patients");
+      const patientsSnapshot = await getDocs(patientsQuery);
+      const patientNames = [];
+      
       for (const patientDoc of patientsSnapshot.docs) {
-        const personalRef = doc(db, "patients", patientDoc.id, "Personal", "Details"); // Reference to the 'Personal' document
-        const personalSnap = await getDoc(personalRef); // Get personal details of patient
-
+        const personalRef = doc(db, "patients", patientDoc.id, "Personal", "Details");
+        const personalSnap = await getDoc(personalRef);
         if (personalSnap.exists()) {
           const personalData = personalSnap.data();
-          names.push({ id: patientDoc.id, name: personalData.name }); // Add patient name to names array
+          patientNames.push({ id: patientDoc.id, name: personalData.name, email: personalData.email });
         }
       }
-
-      setAllNames(names); // Set all names in the state
-      console.log('All patient names:', names);
+      setAllPatients(patientNames);
     } catch (error) {
-      console.log('Error fetching patient names:', error);
+      console.error('Error fetching patient names:', error);
     }
   };
 
-  const handleInput = (e) => {
-    const input = e.target.value.toLowerCase();
-    setSearchTerm(input);
+  const filterPatients = (input) => {
+    const lowerCaseInput = input.toLowerCase();
+    return allPatients.filter(patient =>
+      patient.name?.toLowerCase().includes(lowerCaseInput) ||
+      patient.email?.toLowerCase().includes(lowerCaseInput)
+    );
+  };
 
-    if (input.length > 0) {
-      const filtered = allNames
-        .filter((patient) => patient.name && patient.name.toLowerCase().includes(input)) // Check for patient.name
-        .map((patient) => patient.name); // Extract only the name for display
-
-      setFilterNames(filtered); // Update the filterNames state with the filtered list
-      setShowDropdown(filtered.length > 0); // Show dropdown only if there are results
-      console.log('Filtered Names:', filtered, showDropdown);
+  const handleSearchInputChange = (e, isChargeSearch = false) => {
+    const input = e.target.value;
+    
+    if (isChargeSearch) {
+      if (input.length > 0) {
+        const filtered = filterPatients(input);
+        setFilteredChargePatients(filtered);
+        setSearchChargeTerm(input);
+      } else {
+        setShowEmailTextBox(false)
+        setSearchChargeTerm("")
+        setFilteredChargePatients([])
+      }
     } else {
-      setShowDropdown(false); // Hide dropdown if input is empty
+      const filtered = filterPatients(input);
+      setFilteredPatients(filtered);
+      setSearchTerm(input);
     }
   };
 
@@ -74,45 +89,89 @@ const SideNav = () => {
     navigate(`/patient/${userId}`);
   };
 
-  const handleButtonClickD = () => {
-    navigate('/Diagnose');
+  const handlePatientChargeClick = (patient) => {
+    console.log(patient)
+    setRecipientEmail(patient.email)
+    setRecipientName(patient.name)
+    setSearchChargeTerm(patient.name)
+    setShowEmailTextBox(true)
+    setFilteredChargePatients([])
+  };
+
+  const handleImportPatientClick = () => {
+    navigate('/import-patient');
   };
 
   const handleHomeClick = () => {
-    navigate('/')
-  }
+    navigate('/');
+  };
 
   const handleChargeClick = () => {
     setShowPopup(true);
-    setShowDropdown(false);
-  }
+    handleButtonClick(true);
+  };
 
   const closePopup = () => {
     setShowPopup(false);
+    setShowEmailTextBox(false)
+    setSearchChargeTerm("")
+    setFilteredChargePatients([])
   };
 
+  const handleChargeSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission
+    if (recipientEmail && recipientName && invoiceAmount && invoiceDescription) {
+      createNewCharge(recipientEmail, recipientName, invoiceAmount, invoiceDescription);
+      closePopup(); // Close the popup after submitting
+    }
+  };
 
+  const createNewCharge = (email, name, amount, description) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json',
+        'Authorization': `Bearer 7hrEkR1AyuQPOpfTssB8ZMUCU4OZ0X` // Add the authorization header
+      },
+      body: JSON.stringify({
+        amount: amount,
+        description: description,
+        recipient: email,
+        name: name
+      })
+    };
+
+    fetch('https://sandbox.checkbook.io/v3/invoice', options)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(err => console.error(err));
+  };
 
   return (
     <div className="side-nav">
       <ul>
+        <li>
+          <h1>Connect Health</h1>
+        </li>
         <li>
           <button onClick={handleHomeClick} className="nav-button">
             Home
           </button>
         </li>
         <li>
-          <button onClick={handleButtonClick} className="nav-button">
+          <button onClick={() => handleButtonClick(false)} className="nav-button">
             Patient Search
           </button>
         </li>
         <li>
-          <button onClick={handleButtonClickD} className="nav-button diagnostic-button">Diagnostic</button>
+          <button onClick={toggleImportPatientPopUp} className="nav-button diagnostic-button">Import Patient</button>
         </li>
         <li>
           <button className="nav-button pay-button" onClick={handleChargeClick}>Charge</button>
         </li>
       </ul>
+      {showImportPatientPopUp && <ImportPatientPopup onClose={toggleImportPatientPopUp}/>}
 
       {isSearchMode && (
         <div className="search-patient-container">
@@ -122,52 +181,84 @@ const SideNav = () => {
             className="search-input"
             placeholder="Search patient by name..."
             value={searchTerm}
-            onChange={handleInput}
+            onChange={(e) => handleSearchInputChange(e, false)}
           />
         </div>
       )}
 
-      {showDropdown && filterNames.length > 0 && (
+      {filteredPatients.length > 0 && (
         <div className="dropdown-menu">
-          {filterNames.map((name, index) => (
-            <div className="dropdown-item" key={index} onClick={() => handlePatientClick(name)}>
-              {name}
+          {filteredPatients.map((patient) => (
+            <div className="dropdown-item" key={patient.id} onClick={() => handlePatientClick(patient.id)}>
+              {patient.name}
             </div>
           ))}
         </div>
       )}
-
+      
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup">
             <button className="close-btn" onClick={closePopup}>X</button>
             <h2>Charge Details</h2>
-            <form>
-              <div className="form-group">
-                <label htmlFor="email">Email of the Recipient</label>
-                <input type="email" id="email" name="email" required />
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search patient by name..."
+              value={searchChargeTerm}
+              onChange={(e) => handleSearchInputChange(e, true)}
+            />
+            {filteredChargePatients.length > 0 && (
+              <div className="dropdown-menu">
+                {filteredChargePatients.map((patient) => (
+                  <div className="dropdown-item" key={patient.id} onClick={() => handlePatientChargeClick(patient)}>
+                    {patient.name}
+                  </div>
+                ))}
               </div>
-              <div className="form-group">
-                <label htmlFor="name">Name of the Recipient</label>
-                <input type="text" id="name" name="name" required />
-              </div>
-              <div className="form-group">
-                <label htmlFor="amount">Amount to be Charged</label>
-                <input type="number" id="amount" name="amount" required />
-              </div>
-              <div className="form-group">
-                <label htmlFor="description">Description of the Invoice</label>
-                <textarea id="description" name="description" required></textarea>
-              </div>
-              <button type="submit" className="submit-btn">Submit</button>
+            )}
+            <form onSubmit={handleChargeSubmit}>
+              {showEmailTextBox && (
+                <div className="invoice-details-container">
+                  <input
+                    type="email"
+                    placeholder="Recipient Email"
+                    value={recipientEmail}
+                    onChange={(e) => setRecipientEmail(e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Invoice Amount"
+                    value={invoiceAmount}
+                    onChange={(e) => setInvoiceAmount(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Invoice Description"
+                    value={invoiceDescription}
+                    onChange={(e) => setInvoiceDescription(e.target.value)}
+                  /> 
+                </div>
+              )}
+              {/* <button className="submit-charge" type="submit">Send Invoice</button> */}
+              <button
+                className="submit-charge"
+                type="submit"
+                disabled={
+                  !recipientEmail || !invoiceAmount || !invoiceDescription
+                }
+              >
+                Send Invoice
+               </button> {/*TODO: add a notification in green, saying invoice sent successfully */}
             </form>
           </div>
         </div>
       )}
+
+      {/* pop up for the import patient */}
+
     </div>
   );
 };
 
 export default SideNav;
-
-

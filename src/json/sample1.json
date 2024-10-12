@@ -1,0 +1,64 @@
+{
+    "patients": {
+      "uid12345": {
+        "Personal": {
+          "Details": {
+            "name": "John Doe",
+            "DOB": "1990-01-15",
+            "email": "johndoe@example.com",
+            "phoneNumber": "555-1234",
+            "address": "123 Elm St, Springfield",
+            "emergencyContact": "Jane Doe - 555-5678",
+            "patientPhoto": "https://example.com/photos/johndoe.jpg",
+            "insuranceProvider": "HealthPlus",
+            "insurancePolicy": "HP12345678",
+            "insurancePhoto": "https://example.com/photos/insurance_johndoe.jpg",
+            "physician": "Dr. Smith"
+          }
+        },
+        "MedicalVisits": {
+          "visit1": {
+            "reason": "Checkup",
+            "prescription": "Tylenol",
+            "results": "All clear",
+            "date": "2024-10-01",
+            "time": "09:00 AM"
+          },
+          "visit2": {
+            "reason": "Flu Symptoms",
+            "prescription": "Amoxicillin",
+            "results": "Fever reduced",
+            "date": "2024-10-15",
+            "time": "01:00 PM"
+          }
+        },
+        "Prescriptions": {
+          "prescription1": {
+            "name": "Tylenol",
+            "dosage": "500 mg",
+            "startDate": "2024-10-01",
+            "duration": "7",
+            "recurring": false,
+            "expirationDate": "2024-10-08"
+          },
+          "prescription2": {
+            "name": "Amoxicillin",
+            "dosage": "250 mg twice a day",
+            "startDate": "2024-10-10",
+            "duration": "10",
+            "recurring": false,
+            "expirationDate": "2024-10-20"
+          }
+        },
+        "Financial": {
+          "card1234": {
+            "cardHolderName": "John Doe",
+            "cardNumber": "1234567812345678",
+            "expiryDate": "12/25",
+            "cvv": "123"
+          }
+        }
+      }
+    }
+  }
+  

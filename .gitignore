@@ -12,6 +12,12 @@ firebase.js
 .env
 env
 
+venv/
+venv
+
+python
+python3
+
 # production
 /build
 

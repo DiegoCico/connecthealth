@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 export default function NewCharge(props) {
     const { email, name, amount, description } = props
@@ -19,4 +19,14 @@ export default function NewCharge(props) {
             .then(response => console.log(response))
             .catch(err => console.log(err))
     }
+
+    useEffect(() => {
+        createNewCharge()
+    }, [email, name, amount, description])
+
+    return (
+        <div>
+            
+        </div>
+    )
 }

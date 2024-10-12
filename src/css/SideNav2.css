@@ -155,5 +155,66 @@
   .submit-btn:hover {
     background-color: #4cae4c;
   }
+
+  .invoice-details-container {
+    background-color: #f9f9f9; /* Light background color */
+    padding: 20px; /* Padding around the container */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-bottom: 20px; /* Space below the container */
+  }
+  
+  .invoice-details-container input {
+    width: 90%; /* Full width */
+    padding: 10px; /* Padding inside the input */
+    margin-bottom: 15px; /* Space between inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-size: 16px; /* Font size for better readability */
+    color: #333; /* Dark text color */
+  }
+  
+  .invoice-details-container input::placeholder {
+    color: #aaa; /* Placeholder text color */
+  }
+  
+  .invoice-details-container input:focus {
+    border-color: #1f526b; /* Dark border on focus */
+    outline: none; /* Remove default outline */
+  }
+  
+  
+  .invoice-details-container input[type="number"]::-webkit-inner-spin-button,
+  .invoice-details-container input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Hide spin buttons in Chrome */
+    /* margin: 0; Remove default margin */
+  }
+
+  .submit-charge {
+    margin: 20px;
+    background-color: orange; /* Orange background */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 12px 24px; /* Button padding */
+    font-size: 18px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .submit-charge:hover {
+    background-color: darkorange; /* Darker orange on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+  }
+  
+  .submit-charge:disabled {
+    background-color: lightgray; /* Light gray background when disabled */
+    cursor: not-allowed; /* Change cursor to indicate the button is disabled */
+    box-shadow: none; /* Remove shadow when disabled */
+  }
+  
   
   

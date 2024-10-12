@@ -1,0 +1,64 @@
+{
+    "patients": {
+      "uid98765": {
+        "Personal": {
+          "Details": {
+            "name": "Emily Brown",
+            "DOB": "1988-11-05",
+            "email": "emilyb@example.com",
+            "phoneNumber": "555-4321",
+            "address": "101 Maple St, Star City",
+            "emergencyContact": "Robert Brown - 555-6789",
+            "patientPhoto": "https://example.com/photos/emilyb.jpg",
+            "insuranceProvider": "HealthyCare",
+            "insurancePolicy": "HC76543210",
+            "insurancePhoto": "https://example.com/photos/insurance_emilyb.jpg",
+            "physician": "Dr. White"
+          }
+        },
+        "MedicalVisits": {
+          "visit1": {
+            "reason": "Skin Rash",
+            "prescription": "Hydrocortisone Cream",
+            "results": "Rash clearing up",
+            "date": "2024-07-05",
+            "time": "02:00 PM"
+          },
+          "visit2": {
+            "reason": "Blood Pressure Check",
+            "prescription": "Amlodipine",
+            "results": "Pressure normal",
+            "date": "2024-10-10",
+            "time": "09:00 AM"
+          }
+        },
+        "Prescriptions": {
+          "prescription1": {
+            "name": "Hydrocortisone Cream",
+            "dosage": "Apply twice a day",
+            "startDate": "2024-07-05",
+            "duration": "14",
+            "recurring": false,
+            "expirationDate": "2024-07-19"
+          },
+          "prescription2": {
+            "name": "Amlodipine",
+            "dosage": "5 mg daily",
+            "startDate": "2024-10-10",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": null
+          }
+        },
+        "Financial": {
+          "card3456": {
+            "cardHolderName": "Emily Brown",
+            "cardNumber": "3456345634563456",
+            "expiryDate": "09/28",
+            "cvv": "012"
+          }
+        }
+      }
+    }
+  }
+  

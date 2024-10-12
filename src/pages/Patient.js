@@ -10,6 +10,7 @@ import SideNav from '../components/SideNav';
 
 const Patient = () => {
   const { uid } = useParams();
+  console.log(uid)
   const location = useLocation();
   const { modificationMode } = location.state || {};
 
@@ -169,7 +170,7 @@ const Patient = () => {
 
         {renderTabContent()}
 
-        {modificationMode && (
+        {modificationMode && activeTab === 'personal' && ( // Only show edit and save buttons in Personal tab
           <div className="create-account-button">
             {!isEditable ? (
               <button onClick={toggleEditMode}>Edit</button>

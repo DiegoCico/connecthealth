@@ -1,0 +1,64 @@
+{
+    "patients": {
+      "uid19283": {
+        "Personal": {
+          "Details": {
+            "name": "Chris Lee",
+            "DOB": "1995-04-18",
+            "email": "chrisl@example.com",
+            "phoneNumber": "555-9999",
+            "address": "202 Birch St, Central City",
+            "emergencyContact": "Lee Chen - 555-1111",
+            "patientPhoto": "https://example.com/photos/chrisl.jpg",
+            "insuranceProvider": "MedPlus",
+            "insurancePolicy": "MP11223344",
+            "insurancePhoto": "https://example.com/photos/insurance_chrisl.jpg",
+            "physician": "Dr. Grey"
+          }
+        },
+        "MedicalVisits": {
+          "visit1": {
+            "reason": "Vaccination",
+            "prescription": "COVID-19 Vaccine",
+            "results": "Vaccinated successfully",
+            "date": "2024-09-15",
+            "time": "10:00 AM"
+          },
+          "visit2": {
+            "reason": "Flu Symptoms",
+            "prescription": "Tamiflu",
+            "results": "Symptoms reduced",
+            "date": "2024-10-05",
+            "time": "11:30 AM"
+          }
+        },
+        "Prescriptions": {
+          "prescription1": {
+            "name": "COVID-19 Vaccine",
+            "dosage": "One dose",
+            "startDate": "2024-09-15",
+            "duration": "1",
+            "recurring": false,
+            "expirationDate": "2024-09-16"
+          },
+          "prescription2": {
+            "name": "Tamiflu",
+            "dosage": "75 mg twice a day",
+            "startDate": "2024-10-05",
+            "duration": "5",
+            "recurring": false,
+            "expirationDate": "2024-10-10"
+          }
+        },
+        "Financial": {
+          "card7890": {
+            "cardHolderName": "Chris Lee",
+            "cardNumber": "7890789078907890",
+            "expiryDate": "03/24",
+            "cvv": "345"
+          }
+        }
+      }
+    }
+  }
+  

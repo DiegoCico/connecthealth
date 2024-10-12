@@ -1,0 +1,96 @@
+/* Notification for errors */
+.notification {
+  background-color: #f8d7da; /* Light red background */
+  color: #721c24; /* Dark red text */
+  border: 1px solid #f5c6cb; /* Border for the notification */
+  border-radius: 8px; /* Rounded corners */
+  padding: 15px; /* Padding inside the notification */
+  width: 40%; /* Responsive width */
+  text-align: center; /* Center the text */
+  margin: 0 auto 20px auto; /* Center it and add space below the notification */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  position: relative;
+  z-index: 1; /* Ensure it's above the popup */
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column; /* Arrange the notification and popup vertically */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Popup container */
+.popup {
+  background-color: #f9f9f9; /* Light background color */
+  padding: 20px; /* Padding around the popup */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 300px; /* Set popup width */
+  z-index: 0; /* Ensure popup is below the notification */
+}
+
+/* Popup buttons container */
+.popup-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* File input */
+.popup input[type="file"] {
+  width: 90%; /* Full width */
+  padding: 10px; /* Padding inside the input */
+  margin-bottom: 15px; /* Space between inputs */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  font-size: 16px; /* Font size for better readability */
+  color: #333; /* Dark text color */
+}
+
+/* File input placeholder */
+.popup input::placeholder {
+  color: #aaa; /* Placeholder text color */
+}
+
+/* File input focus */
+.popup input:focus {
+  border-color: #1f526b; /* Dark border on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Submit button */
+.popup-buttons button {
+  margin: 0;
+  background-color: orange; /* Orange background */
+  color: white; /* White text color */
+  border: none; /* No border */
+  padding: 12px 24px; /* Button padding */
+  font-size: 18px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 8px; /* Rounded corners */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Submit button hover */
+.popup-buttons button:hover {
+  background-color: darkorange; /* Darker orange on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Submit button disabled state */
+.popup-buttons button:disabled {
+  background-color: lightgray; /* Light gray background when disabled */
+  cursor: not-allowed; /* Change cursor to indicate the button is disabled */
+  box-shadow: none; /* Remove shadow when disabled */
+}

@@ -1,0 +1,64 @@
+{
+    "patients": {
+      "uid54321": {
+        "Personal": {
+          "Details": {
+            "name": "Alex Johnson",
+            "DOB": "1992-03-25",
+            "email": "alexj@example.com",
+            "phoneNumber": "555-6789",
+            "address": "789 Pine St, Gotham",
+            "emergencyContact": "Sarah Johnson - 555-8765",
+            "patientPhoto": "https://example.com/photos/alexj.jpg",
+            "insuranceProvider": "CareFirst",
+            "insurancePolicy": "CF34567890",
+            "insurancePhoto": "https://example.com/photos/insurance_alexj.jpg",
+            "physician": "Dr. Black"
+          }
+        },
+        "MedicalVisits": {
+          "visit1": {
+            "reason": "Injury",
+            "prescription": "Ibuprofen",
+            "results": "Healing well",
+            "date": "2024-08-15",
+            "time": "03:00 PM"
+          },
+          "visit2": {
+            "reason": "Chronic Condition Follow-up",
+            "prescription": "Metformin",
+            "results": "Condition stable",
+            "date": "2024-09-30",
+            "time": "12:00 PM"
+          }
+        },
+        "Prescriptions": {
+          "prescription1": {
+            "name": "Ibuprofen",
+            "dosage": "400 mg as needed",
+            "startDate": "2024-08-15",
+            "duration": "14",
+            "recurring": false,
+            "expirationDate": "2024-08-29"
+          },
+          "prescription2": {
+            "name": "Metformin",
+            "dosage": "500 mg twice a day",
+            "startDate": "2024-09-30",
+            "duration": "30",
+            "recurring": true,
+            "expirationDate": null
+          }
+        },
+        "Financial": {
+          "card9012": {
+            "cardHolderName": "Alex Johnson",
+            "cardNumber": "9012901290129012",
+            "expiryDate": "06/27",
+            "cvv": "789"
+          }
+        }
+      }
+    }
+  }
+  
