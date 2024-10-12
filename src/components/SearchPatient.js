@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { getFirestore, collection, query, where, getDocs, doc, getDoc, addDoc } from "firebase/firestore";
-import "../css/SearchPatient.css"; // Importing the CSS for styling
+import { collection, query, where, getDocs, doc, getDoc, addDoc } from "firebase/firestore";
+import { db } from "../firebase"; 
+import "../css/SearchPatient.css"; 
 import { useNavigate } from 'react-router-dom';
 
 const SearchPatient = () => {
@@ -9,7 +10,6 @@ const SearchPatient = () => {
   const [patients, setPatients] = useState([]);
   const [noResults, setNoResults] = useState(false);
   const navigate = useNavigate();
-  const db = getFirestore();
 
   const handleSearch = async () => {
     if (searchTerm.trim() === "") {
@@ -34,7 +34,7 @@ const SearchPatient = () => {
         if (personalSnapshot.exists()) {
           results.push({
             id: userId,
-            ...personalSnapshot.data()
+            ...personalSnapshot.data(),
           });
         }
       }
@@ -57,16 +57,13 @@ const SearchPatient = () => {
   };
 
   const handleCreatePatient = async () => {
-    // Create a new document for the patient to generate a new uid
     const newPatientRef = await addDoc(collection(db, "patients"), { createdAt: new Date() });
     const newUid = newPatientRef.id;
-
-    // Navigate to patient page with modification mode state
     navigate(`/patient/${newUid}`, { state: { modificationMode: true } });
   };
 
   const handlePatientClick = (userId) => {
-    navigate(`/patient/${userId}`); // Navigate to /patient/uid
+    navigate(`/patient/${userId}`);
   };
 
   return (
