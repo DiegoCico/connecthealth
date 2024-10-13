@@ -28,7 +28,7 @@ app.use(express.json());
 console.log('CORS and JSON middleware set up');
 
 // News API Client
-// const newsapi = new NewsAPI("0eeb8ca7c8544ef5b3ab3684362ef604"); // Use your News API key
+const newsapi = new NewsAPI("0eeb8ca7c8544ef5b3ab3684362ef604"); // Use your News API key
 
 // Helper function to introduce a delay
 const sleep = (ms) => {
@@ -121,7 +121,7 @@ app.post('/api/chat', async (req, res) => {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${"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"}`,
+                    Authorization: `Bearer ${"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"}`,
                     'Content-Type': 'application/json',
                 },
             }
