@@ -80,4 +80,4 @@ Ruff is designed to be a lighthearted, dog-friendly companion in the world of he
 
 ## Contributing
 
-We welcome contributions! Please submit pull requests or report issues to help improve **ConnectHealth**.
+We welcome contributions! Please submit pull requests or report issues to help improve **ConnectHealth**!
