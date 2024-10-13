@@ -63,6 +63,21 @@ Ruff is designed to be a lighthearted, dog-friendly companion in the world of he
 ## Project Infastructor
 <img width="1012" alt="Screenshot 2024-10-12 at 1 37 58 PM" src="https://github.com/user-attachments/assets/95fa3e45-7921-4ad1-bb03-a66bf1a70b5f">
 
+## Future Improvements
+
+### 1. **Advanced AI for Ruff**
+- **Predictive Analytics**: Use machine learning to predict patient outcomes and provide proactive care suggestions.
+- **NLP**: Enhance Ruff’s understanding of complex medical commands for better interaction.
+  
+### 2. **Mobile App**
+- **Cross-Platform Access**: Build an iOS/Android app for easy access to patient data.
+- **Push Notifications**: Remind patients of appointments or prescription refills.
+
+### 3. **Interoperability**
+- **EHR Integration**: Connect with other EHR systems for seamless data sharing between hospitals.
+- **Pharmacy Integration**: Streamline prescription ordering with direct connections to pharmacies.
+
+
 ## Contributing
 
 We welcome contributions! Please submit pull requests or report issues to help improve **ConnectHealth**.

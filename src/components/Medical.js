@@ -4,24 +4,38 @@ import { db } from '../firebase'; // Firebase config
 import '../css/Medical.css'; // Importing the new CSS
 
 const Medical = ({ uid }) => {
-  const [showPopup, setShowPopup] = useState(false);
-  const [showPrescriptionPopup, setShowPrescriptionPopup] = useState(false); // New prescription popup state
-  const [editPrescriptionId, setEditPrescriptionId] = useState(null); // For editing a prescription
+  // State to manage the visibility of the doctor visit popup
+  const [showPopup, setShowPopup] = useState(false); 
+  
+  // State to manage the visibility of the prescription popup
+  const [showPrescriptionPopup, setShowPrescriptionPopup] = useState(false); 
+  
+  // State to manage the ID of the prescription being edited (if any)
+  const [editPrescriptionId, setEditPrescriptionId] = useState(null); 
+  
+  // State to store the data for a medical visit
   const [visitData, setVisitData] = useState({
     reason: '',
     prescription: '',
     results: ''
   });
+  
+  // State to store the data for a prescription
   const [prescriptionData, setPrescriptionData] = useState({
     name: '',
-    startDate: new Date().toLocaleDateString(),
+    startDate: new Date().toLocaleDateString(), // Automatically input current date
     dosage: '',
     duration: '',
     recurring: false
   });
-  const [savedVisits, setSavedVisits] = useState([]); // To hold saved visits
-  const [prescriptions, setPrescriptions] = useState([]); // To hold prescriptions
 
+  // State to store the list of saved medical visits
+  const [savedVisits, setSavedVisits] = useState([]); 
+  
+  // State to store the list of prescriptions
+  const [prescriptions, setPrescriptions] = useState([]); 
+
+  // List of reasons for a medical visit
   const reasonsForVisit = [
     'Checkup',
     'Flu Symptoms',
@@ -33,22 +47,27 @@ const Medical = ({ uid }) => {
     'Other'
   ];
 
+  // Handle input change for visit data form
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    // Update the visit data state by spreading the previous state and updating the changed field
     setVisitData((prevData) => ({
       ...prevData,
       [name]: value
     }));
   };
 
+  // Handle input change for prescription data form
   const handlePrescriptionChange = (e) => {
     const { name, value } = e.target;
+    // Update the prescription data state by spreading the previous state and updating the changed field
     setPrescriptionData((prevData) => ({
       ...prevData,
       [name]: value
     }));
   };
 
+  // Handle checkbox toggle for the "recurring" field in the prescription form
   const handleRecurringChange = (e) => {
     setPrescriptionData((prevData) => ({
       ...prevData,
@@ -57,12 +76,15 @@ const Medical = ({ uid }) => {
     }));
   };
 
+  // Toggle the visibility of the doctor visit popup
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
 
+  // Toggle the visibility of the prescription popup; also handles setting prescription data for editing
   const togglePrescriptionPopup = (prescription = null) => {
     if (prescription) {
+      // If editing an existing prescription, set its data in the form
       setPrescriptionData({
         name: prescription.name,
         startDate: prescription.startDate,
@@ -72,6 +94,7 @@ const Medical = ({ uid }) => {
       });
       setEditPrescriptionId(prescription.id); // Set the ID for editing
     } else {
+      // If adding a new prescription, reset the form
       setPrescriptionData({
         name: '',
         startDate: new Date().toLocaleDateString(),
@@ -79,25 +102,32 @@ const Medical = ({ uid }) => {
         duration: '',
         recurring: false
       });
-      setEditPrescriptionId(null); // New prescription
+      setEditPrescriptionId(null); // Reset editing state
     }
-    setShowPrescriptionPopup(!showPrescriptionPopup);
+    setShowPrescriptionPopup(!showPrescriptionPopup); // Toggle the popup visibility
   };
 
+  // Save the visit to Firestore
   const saveVisit = async () => {
     const timestamp = new Date(); 
     const formattedDate = timestamp.toLocaleDateString();
     const formattedTime = timestamp.toLocaleTimeString();
 
     try {
-      const visitRef = doc(collection(db, 'patients', uid, 'MedicalVisits')); // Ensure MedicalVisits is the collection
+      // Create a reference to a new document in the MedicalVisits collection for the current user
+      const visitRef = doc(collection(db, 'patients', uid, 'MedicalVisits')); 
+      
+      // Save the visit data along with the current date and time
       await setDoc(visitRef, {
         ...visitData,
         date: formattedDate,
         time: formattedTime
       });
 
+      // Fetch the updated list of visits
       fetchSavedVisits();
+      
+      // Reset visit form and close popup
       setVisitData({ reason: '', results: '' });
       setShowPopup(false);
     } catch (error) {
@@ -105,19 +135,24 @@ const Medical = ({ uid }) => {
     }
   };
 
+  // Save or update the prescription in Firestore
   const savePrescription = async () => {
     try {
       const prescriptionRef = editPrescriptionId
-        ? doc(db, 'patients', uid, 'Prescriptions', editPrescriptionId) // Update existing prescription
-        : doc(collection(db, 'patients', uid, 'Prescriptions')); // Add new prescription
+        ? doc(db, 'patients', uid, 'Prescriptions', editPrescriptionId) // If editing, update the existing prescription
+        : doc(collection(db, 'patients', uid, 'Prescriptions')); // If adding a new one, create a new document
 
+      // Save the prescription data along with the current date and calculated expiration date (if not recurring)
       await setDoc(prescriptionRef, {
         ...prescriptionData,
         startDate: new Date().toLocaleDateString(), // Automatically input current date
         expirationDate: prescriptionData.recurring ? null : calculateExpirationDate(prescriptionData.startDate, prescriptionData.duration)
       });
 
+      // Fetch the updated list of prescriptions
       fetchPrescriptions();
+      
+      // Reset prescription form and close popup
       setPrescriptionData({ name: '', startDate: new Date().toLocaleDateString(), dosage: '', duration: '', recurring: false });
       setShowPrescriptionPopup(false);
     } catch (error) {
@@ -125,18 +160,21 @@ const Medical = ({ uid }) => {
     }
   };
 
+  // Calculate expiration date based on the start date and duration of the prescription
   const calculateExpirationDate = (startDate, duration) => {
     const start = new Date(startDate);
     const durationInDays = parseInt(duration, 10);
-    start.setDate(start.getDate() + durationInDays);
+    start.setDate(start.getDate() + durationInDays); // Add the duration to the start date
     return start.toLocaleDateString();
   };
 
+  // Fetch saved visits from Firestore
   const fetchSavedVisits = async () => {
     const visits = [];
-    const visitsCollectionRef = collection(db, 'patients', uid, 'MedicalVisits'); // Ensure this path is correct
-    const querySnapshot = await getDocs(visitsCollectionRef);
+    const visitsCollectionRef = collection(db, 'patients', uid, 'MedicalVisits'); // Collection reference for medical visits
+    const querySnapshot = await getDocs(visitsCollectionRef); // Fetch all documents in the collection
 
+    // Map the documents to an array of visit objects
     querySnapshot.forEach((doc) => {
       visits.push({
         id: doc.id,
@@ -144,14 +182,16 @@ const Medical = ({ uid }) => {
       });
     });
 
-    setSavedVisits(visits); 
+    setSavedVisits(visits); // Update the state with the fetched visits
   };
 
+  // Fetch prescriptions from Firestore
   const fetchPrescriptions = async () => {
     const prescriptionsList = [];
-    const prescriptionsCollectionRef = collection(db, 'patients', uid, 'Prescriptions'); // Ensure this path is correct
-    const querySnapshot = await getDocs(prescriptionsCollectionRef);
+    const prescriptionsCollectionRef = collection(db, 'patients', uid, 'Prescriptions'); // Collection reference for prescriptions
+    const querySnapshot = await getDocs(prescriptionsCollectionRef); // Fetch all documents in the collection
 
+    // Map the documents to an array of prescription objects
     querySnapshot.forEach((doc) => {
       prescriptionsList.push({
         id: doc.id,
@@ -159,9 +199,10 @@ const Medical = ({ uid }) => {
       });
     });
 
-    setPrescriptions(prescriptionsList);
+    setPrescriptions(prescriptionsList); // Update the state with the fetched prescriptions
   };
 
+  // Effect hook to fetch visits and prescriptions when the `uid` changes
   useEffect(() => {
     if (uid) {
       fetchSavedVisits();
@@ -191,16 +232,15 @@ const Medical = ({ uid }) => {
                   ))}
                 </select>
               </label>
-              <br>
-              </br>
+              <br />
               <label>
                 Results:
                 <textarea
                   name="results"
                   value={visitData.results}
                   onChange={handleInputChange}
-                  rows="4" // You can adjust the number of rows to control the height
-                  style={{ width: '100%' }} // This ensures it takes up the full width of the form
+                  rows="4"
+                  style={{ width: '100%' }}
                 />
               </label>
               <br />
@@ -215,7 +255,11 @@ const Medical = ({ uid }) => {
           <p>No visits recorded.</p>
         ) : (
           savedVisits.map((visit) => (
-            <VisitDetails key={visit.id} visit={visit} />
+            <div key={visit.id}>
+              <p>Date: {visit.date}</p>
+              <p>Reason: {visit.reason}</p>
+              <p>Results: {visit.results}</p>
+            </div>
           ))
         )}
       </div>
@@ -232,17 +276,33 @@ const Medical = ({ uid }) => {
             <div className="popup-content">
               <h3>{editPrescriptionId ? 'Edit Prescription' : 'Add Prescription'}</h3>
               <label>
-                Prescription Name:
-                <input type="text" name="name" value={prescriptionData.name} onChange={handlePrescriptionChange} />
+                Name:
+                <input
+                  type="text"
+                  name="name"
+                  value={prescriptionData.name}
+                  onChange={handlePrescriptionChange}
+                />
               </label>
               <br />
               <label>
-                Start Date: {prescriptionData.startDate}
+                Start Date:
+                <input
+                  type="text"
+                  name="startDate"
+                  value={prescriptionData.startDate}
+                  onChange={handlePrescriptionChange}
+                />
               </label>
               <br />
               <label>
                 Dosage:
-                <input type="text" name="dosage" value={prescriptionData.dosage} onChange={handlePrescriptionChange} />
+                <input
+                  type="text"
+                  name="dosage"
+                  value={prescriptionData.dosage}
+                  onChange={handlePrescriptionChange}
+                />
               </label>
               <br />
               <label>
@@ -266,59 +326,27 @@ const Medical = ({ uid }) => {
                 />
               </label>
               <br />
-              <button onClick={savePrescription}>{editPrescriptionId ? 'Update Prescription' : 'Save Prescription'}</button>
-              <button onClick={() => togglePrescriptionPopup(null)}>Cancel</button>
+              <button onClick={savePrescription}>{editPrescriptionId ? 'Save Changes' : 'Add Prescription'}</button>
+              <button onClick={togglePrescriptionPopup}>Cancel</button>
             </div>
           </div>
         )}
 
-        <h3>Available Prescriptions</h3>
-        {prescriptions.filter(pres => !isPrescriptionExpired(pres.expirationDate)).length === 0 ? (
-          <p>No available prescriptions.</p>
+        <h3>Current Prescriptions</h3>
+        {prescriptions.length === 0 ? (
+          <p>No prescriptions added.</p>
         ) : (
-          prescriptions.filter(pres => !isPrescriptionExpired(pres.expirationDate)).map((pres) => (
-            <div key={pres.id} onClick={() => togglePrescriptionPopup(pres)} style={{ cursor: 'pointer' }}>
-              <p><strong>{pres.name}</strong></p>
-              <p>Dosage: {pres.dosage}</p>
-            </div>
-          ))
-        )}
-
-        <h3>Expired Prescriptions</h3>
-        {prescriptions.filter(pres => isPrescriptionExpired(pres.expirationDate)).length === 0 ? (
-          <p>No expired prescriptions.</p>
-        ) : (
-          prescriptions.filter(pres => isPrescriptionExpired(pres.expirationDate)).map((pres) => (
-            <div key={pres.id}>
-              <p><strong>{pres.name}</strong></p>
-              <p>Dosage: {pres.dosage}</p>
+          prescriptions.map((prescription) => (
+            <div key={prescription.id}>
+              <p>Name: {prescription.name}</p>
+              <p>Dosage: {prescription.dosage}</p>
+              <p>Start Date: {prescription.startDate}</p>
+              <p>Duration: {prescription.recurring ? 'Recurring' : `${prescription.duration} days`}</p>
+              <button onClick={() => togglePrescriptionPopup(prescription)}>Edit</button>
             </div>
           ))
         )}
       </div>
-    </div>
-  );
-};
-
-const isPrescriptionExpired = (expirationDate) => {
-  if (!expirationDate) return false; // Recurring prescriptions are always active
-  const currentDate = new Date();
-  const expDate = new Date(expirationDate);
-  return currentDate > expDate;
-};
-
-const VisitDetails = ({ visit }) => {
-  const [expanded, setExpanded] = useState(false);
-
-  return (
-    <div className="visit-details">
-      <p onClick={() => setExpanded(!expanded)}>{visit.date} {visit.time}</p>
-      {expanded && (
-        <div className="visit-info">
-          <p><strong>Reason:</strong> {visit.reason}</p>
-          <p><strong>Results:</strong> {visit.results}</p>
-        </div>
-      )}
     </div>
   );
 };

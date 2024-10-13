@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { doc, setDoc, collection, getDocs } from 'firebase/firestore'; // Import Firestore functions
 import { db } from '../firebase'; // Your Firebase config
 
+/**
+ * The Financial component manages financial information (credit cards) for a user.
+ * It allows users to add new card details, view saved cards, edit, and remove cards from Firestore.
+ * 
+ * @param {string} uid - The user ID associated with the financial information.
+ */
 const Financial = ({ uid }) => {
+  // State to hold new card data entered by the user
   const [newCardData, setNewCardData] = useState({
     cardNumber: '',
     cardHolderName: '',
@@ -10,22 +17,35 @@ const Financial = ({ uid }) => {
     cvv: ''
   });
 
-  const [savedCards, setSavedCards] = useState([]); // State to hold saved cards
+  // State to hold saved cards retrieved from Firestore
+  const [savedCards, setSavedCards] = useState([]);
 
-  // Define the editCard function
+  /**
+   * Function to handle editing an existing card.
+   * @param {string} cardId - The ID of the card to edit (last four digits of the card).
+   */
   const editCard = (cardId) => {
     console.log(`Edit card with ID: ${cardId}`);
     alert(`Editing card with ID: ${cardId}`);
+    // Implement card editing logic here
   };
 
-  // Define the removeCard function
+  /**
+   * Function to handle removing a card.
+   * @param {string} cardId - The ID of the card to remove (last four digits of the card).
+   */
   const removeCard = async (cardId) => {
     console.log(`Remove card with ID: ${cardId}`);
     alert(`Removing card with ID: ${cardId}`);
     // Implement card removal logic here, e.g., delete from Firestore
   };
 
-  // Handle input change for new card information
+  /**
+   * Handle input change for new card data.
+   * This function updates the state with the values entered by the user.
+   * 
+   * @param {object} e - The event triggered by input change.
+   */
   const handleCardInputChange = (e) => {
     const { name, value } = e.target;
     setNewCardData((prevData) => ({
@@ -34,7 +54,12 @@ const Financial = ({ uid }) => {
     }));
   };
 
-  // Validate the card information
+  /**
+   * Validates the new card information entered by the user.
+   * Ensures the card number is 16 digits, expiry date is in MM/YY format, and CVV is 3 digits.
+   * 
+   * @returns {boolean} - Returns true if validation passes, false otherwise.
+   */
   const validateCard = () => {
     const { cardNumber, expiryDate, cvv } = newCardData;
 
@@ -60,7 +85,11 @@ const Financial = ({ uid }) => {
     return true;
   };
 
-  // Function to handle the addition of a new card
+  /**
+   * Adds a new card to Firestore after validating the input.
+   * Saves the card information under a collection named 'Financial' for the specific user.
+   * Refreshes the saved card list after a successful addition.
+   */
   const addCard = async () => {
     if (!validateCard()) {
       return; // If validation fails, exit the function
@@ -97,12 +126,16 @@ const Financial = ({ uid }) => {
     }
   };
 
-  // Function to fetch saved cards from Firestore
+  /**
+   * Fetches saved cards from Firestore for the user.
+   * Retrieves the card information from the 'Financial' collection under the user ID.
+   */
   const fetchSavedCards = async () => {
     const cards = [];
     const cardsCollectionRef = collection(db, 'patients', uid, 'Financial');
     const querySnapshot = await getDocs(cardsCollectionRef);
 
+    // Loop through Firestore documents and push card data to the array
     querySnapshot.forEach((doc) => {
       cards.push({
         id: doc.id, // Last 4 digits as ID
@@ -113,7 +146,10 @@ const Financial = ({ uid }) => {
     setSavedCards(cards); // Update the state with fetched cards
   };
 
-  // Fetch saved cards when the component mounts
+  /**
+   * useEffect hook to fetch saved cards when the component mounts.
+   * It runs only once when the component is first rendered.
+   */
   useEffect(() => {
     fetchSavedCards();
   }, []);

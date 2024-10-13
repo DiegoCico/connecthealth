@@ -6,6 +6,7 @@ import ImportPatientPopup from "./ImportPatientPopUp";
 import '../css/SideNav2.css'; // Ensure you have this CSS file
 
 const SideNav = () => {
+  // State variables
   const [isSearchMode, setIsSearchMode] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [allPatients, setAllPatients] = useState([]);
@@ -22,18 +23,22 @@ const SideNav = () => {
   const [invoiceDescription, setInvoiceDescription] = useState('');
 
   const [showImportPatientPopUp, setShowImportPatientPopUp] = useState(false)
-  const toggleImportPatientPopUp = () => {
-    setShowImportPatientPopUp(!showImportPatientPopUp)
-  }
   
   const navigate = useNavigate();
 
+  // Toggle import patient popup
+  const toggleImportPatientPopUp = () => {
+    setShowImportPatientPopUp(!showImportPatientPopUp);
+  };
+
+  // Create a new patient
   const handleCreatePatient = async () => {
     const newPatientRef = await addDoc(collection(db, "patients"), { createdAt: new Date() });
     const newUid = newPatientRef.id;
     navigate(`/patient/${newUid}`, { state: { modificationMode: true } });
   };
 
+  // Handle button click for patient search or charge
   const handleButtonClick = async (charge) => {
     if (!charge) {
       setIsSearchMode(true);
@@ -57,6 +62,7 @@ const SideNav = () => {
     }
   };
 
+  // Filter patients based on search input
   const filterPatients = (input) => {
     const lowerCaseInput = input.toLowerCase();
     return allPatients.filter(patient =>
@@ -65,6 +71,7 @@ const SideNav = () => {
     );
   };
 
+  // Handle search input change
   const handleSearchInputChange = (e, isChargeSearch = false) => {
     const input = e.target.value;
     
@@ -74,9 +81,9 @@ const SideNav = () => {
         setFilteredChargePatients(filtered);
         setSearchChargeTerm(input);
       } else {
-        setShowEmailTextBox(false)
-        setSearchChargeTerm("")
-        setFilteredChargePatients([])
+        setShowEmailTextBox(false);
+        setSearchChargeTerm("");
+        setFilteredChargePatients([]);
       }
     } else {
       const filtered = filterPatients(input);
@@ -85,47 +92,54 @@ const SideNav = () => {
     }
   };
 
+  // Handle patient selection in search mode
   const handlePatientClick = (userId) => {
     navigate(`/patient/${userId}`);
   };
 
+  // Handle patient selection for charge
   const handlePatientChargeClick = (patient) => {
-    console.log(patient)
-    setRecipientEmail(patient.email)
-    setRecipientName(patient.name)
-    setSearchChargeTerm(patient.name)
-    setShowEmailTextBox(true)
-    setFilteredChargePatients([])
+    setRecipientEmail(patient.email);
+    setRecipientName(patient.name);
+    setSearchChargeTerm(patient.name);
+    setShowEmailTextBox(true);
+    setFilteredChargePatients([]);
   };
 
+  // Navigate to import patient page
   const handleImportPatientClick = () => {
     navigate('/import-patient');
   };
 
+  // Navigate to home page
   const handleHomeClick = () => {
     navigate('/');
   };
 
+  // Handle charge button click
   const handleChargeClick = () => {
     setShowPopup(true);
     handleButtonClick(true);
   };
 
+  // Close the charge popup
   const closePopup = () => {
     setShowPopup(false);
-    setShowEmailTextBox(false)
-    setSearchChargeTerm("")
-    setFilteredChargePatients([])
+    setShowEmailTextBox(false);
+    setSearchChargeTerm("");
+    setFilteredChargePatients([]);
   };
 
+  // Handle charge form submission
   const handleChargeSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     if (recipientEmail && recipientName && invoiceAmount && invoiceDescription) {
       createNewCharge(recipientEmail, recipientName, invoiceAmount, invoiceDescription);
-      closePopup(); // Close the popup after submitting
+      closePopup();
     }
   };
 
+  // Create a new charge
   const createNewCharge = (email, name, amount, description) => {
     const options = {
       method: 'POST',
@@ -171,6 +185,7 @@ const SideNav = () => {
           <button className="nav-button pay-button" onClick={handleChargeClick}>Charge</button>
         </li>
       </ul>
+      
       {showImportPatientPopUp && <ImportPatientPopup onClose={toggleImportPatientPopUp}/>}
 
       {isSearchMode && (
@@ -240,7 +255,6 @@ const SideNav = () => {
                   /> 
                 </div>
               )}
-              {/* <button className="submit-charge" type="submit">Send Invoice</button> */}
               <button
                 className="submit-charge"
                 type="submit"
@@ -249,14 +263,11 @@ const SideNav = () => {
                 }
               >
                 Send Invoice
-               </button> {/*TODO: add a notification in green, saying invoice sent successfully */}
+               </button> 
             </form>
           </div>
         </div>
       )}
-
-      {/* pop up for the import patient */}
-
     </div>
   );
 };
