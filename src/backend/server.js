@@ -121,7 +121,7 @@ app.post('/api/chat', async (req, res) => {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${"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"}`,
+                    Authorization: `Bearer ${"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"}`,
                     'Content-Type': 'application/json',
                 },
             }

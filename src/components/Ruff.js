@@ -38,7 +38,7 @@ const Ruff = () => {
       }
 
       if (foundUserData) {
-        return `Name: ${foundUserData.name}, DOB: ${foundUserData.dob}, Allergies: ${foundUserData.allergies}, Address: ${foundUserData.address}, Phone Number: ${foundUserData.phoneNumber}`;
+        return `Name: ${foundUserData.name}, DOB: ${foundUserData.DOB}, Allergies: ${foundUserData.allergies}, Address: ${foundUserData.address}, Phone Number: ${foundUserData.phoneNumber}`;
       } else {
         return `User with the name ${name} not found.`;
       }
