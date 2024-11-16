@@ -1,5 +1,6 @@
 # ConnectHealth
 
+
 **ConnectHealth** is a secure and efficient platform designed to help hospitals manage patient data while ensuring data security and fostering collaboration between healthcare providers. The platform is powered by **Ruff**, an AI assistant that helps doctors make informed decisions on medications, treatments, and patient care protocols.
 
 ## Why This Project Was Created
